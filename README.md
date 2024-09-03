@@ -1,15 +1,38 @@
-# 🔫 pistols-64
+# :octopus: Shoggoths Deli no.23 "purveyor of fine meats"
 
-For the **Dojo Game Jam @ Dojo Sensei Residency NYC 2024**
+An experiment in composability and discovery.
+
+**initially built for the Dojo Game Jam @ Dojo Sensei Residency NYC 2024**
 
 ## Team
 
 * [Roger Mataleone](https://github.com/rsodre) / [@matalecode](https://x.com/matalecode)
 * [Tim Storey](https://github.com/lbdl) / [@itrainspiders](https://x.com/itrainspiders)
-* Calcutator
+
+
+## :raised_hand: What/Why?
+
+We would like to be able to find other worlds to interact with and we would like to experiment with composability on chain.
+There is currently no means of finding other worlds and composability is super experimental.
+
+So we propose a system where we can register our world find other worlds and by extention allow other worlds to discover us.
+This should function in a similar fashion to DNS but for onchain AW's. Once found we would then like to provide a means of composability (in this case via interfaces that allow for the creation of dispatchers to the now discovered systems).
+
+## :bulb: High level view
+
+* The `Deli`, the discovery service.
+  * `Planetary` is a Dojo world deployed on Katana/Slot/Starknet
+    * It provides the `planetary_interface` for world discovery.
+  * Worlds need to `register()` to `Planetary` to be discoverable, usually at `dojo_init()`.
+  * Any world can discover other worlds from the interface.
+* The interfaces, the means by which we interact with discovered systems.
+  * Discoverable worlds need their interface to be included in the `Planetary` interface.
+* The Dojo worlds themselves.
+
+
+
 
 ## Contents
-
 ### Dojo Contracts
 
 * `/dojo/planetary`: world catalogue
@@ -22,28 +45,24 @@ For the **Dojo Game Jam @ Dojo Sensei Residency NYC 2024**
 * `/clients/terminal`: Python shell terminal client
 * [TheOrugginTrail](https://github.com/ArchetypalTech/TheOrugginTrail-DoJo): text adventure client
 
-
-## 🌎 The Planetary System 
+## 🌎 The Planetary System/Shoggoths Deli no.23
 
 **Planetary** is a Dojo world that connects other Dojo worlds.
 
 > ⚠️ This is a proof of concept, not secure, not meant for production.
 
-How does it work?
 
-* Planetary is a Dojo world deployed on Katana/Slot/Starknet
-* It provides the `planetary_interface` crate for world discovery.
-* Worlds need to `register()` to Planetary to be discoverable, usually at `dojo_init()`.
-* Any world can discover other worlds from the interface.
-* Discoverable worlds need their interface to be included in the Planetary interface.
-
-Things to do and consider for future developments:
+<!-- Things to do and consider for future developments:
 
 * Some protection around who can register and unregister worlds. Adding the worlds class hashes to the interface and checking the caller class hash matches it.
-* This is a simple system but may be over-complicated. Since discoverable worlds are white-listed, they could have their world address hard-coded.
-
+ -->
 
 ![Planetary System](images/graph.png)
+
+1. worlds register their address to the the planetary interface.
+2. worlds query planetary to find other worlds and their addresses.
+3. worlds (having implemented the dispatcher interfaces exposed by planetary) can interact with other worlds.
+4. :bacon:
 
 ## 🪐 Planetary integration
 
@@ -52,7 +71,7 @@ Import `planetary_interface ` in your Dojo project `Scarb.toml`:
 ```toml
 [dependencies]
 dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.7" }
-planetary_interface = { git = "https://github.com/underware-gg/pistols-64", branch = "main" }
+planetary_interface = { git = "https://github.com/ArchetypalTech/shoggoths-planetary-deli", branch = "main" }
 # planetary_interface = { path = "../planetary_interface" }
 ```
 
