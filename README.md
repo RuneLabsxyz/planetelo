@@ -4,32 +4,43 @@ An experiment in composability and discovery.
 
 **initially built for the Dojo Game Jam @ Dojo Sensei Residency NYC 2024**
 
+This is a fork of the work done on the game jam. For the original repo see [here](https://github.com/underware-gg/pistols-64)
+
 ## Team
 
 * [Roger Mataleone](https://github.com/rsodre) / [@matalecode](https://x.com/matalecode)
+* [Underware](https://github.com/underware-gg)
 * [Tim Storey](https://github.com/lbdl) / [@itrainspiders](https://x.com/itrainspiders)
-
+* [Archetypal](https://github.com/ArchetypalTech)
 
 ## :raised_hand: What/Why?
 
-We would like to be able to find other worlds to interact with and we would like to experiment with composability on chain.
-There is currently no means of finding other worlds and composability is super experimental.
+We want to call other worlds and cause state changes and trigger events. These events would ideally feedback across the interacting worlds, in other words we want to experiment with composability.
+
+To do this we need to know about other worlds, this is where this system comes in to play.
+
+Right now we have to know where these worlds are, their addresses, their contracts etc and assuming we have this information we would then have to hard code this into our world. Ugh.
+
+Currently there is no means of one world finding an other worlds's address. Ugh (again).
 
 So we propose a system where we can register our world find other worlds and by extention allow other worlds to discover us.
-This should function in a similar fashion to DNS but for onchain AW's. Once found we would then like to provide a means of composability (in this case via interfaces that allow for the creation of dispatchers to the now discovered systems).
+i.e. **Discovery**
+
+This discovery service should function in a similar fashion to DNS but for onchain AW's. 
+
+Once found we would then like to call them (in this case via interfaces that allow for the creation of dispatchers to the now discovered systems).
+i.e. **Composability**
 
 ## :bulb: High level view
 
-* The `Deli`, the discovery service.
+* The `Deli`, the `discovery` service.
   * `Planetary` is a Dojo world deployed on Katana/Slot/Starknet
     * It provides the `planetary_interface` for world discovery.
   * Worlds need to `register()` to `Planetary` to be discoverable, usually at `dojo_init()`.
   * Any world can discover other worlds from the interface.
-* The interfaces, the means by which we interact with discovered systems.
+* The interfaces, the means by which we interact with discovered systems, the `composability` part.
   * Discoverable worlds need their interface to be included in the `Planetary` interface.
 * The Dojo worlds themselves.
-
-
 
 
 ## Contents
@@ -43,8 +54,7 @@ This should function in a similar fashion to DNS but for onchain AW's. Once foun
 
 * `/clients/sdk`: generated files from the `pistols64` contract (manifest, typescript, GraphQL)
 * `/clients/terminal`: Python shell terminal client
-* [TheOrugginTrail](https://github.com/ArchetypalTech/TheOrugginTrail-DoJo): text adventure client
-
+* [TheOrugginTrail](https://github.com/ArchetypalTech/TheOrugginTrail-DoJo): text adventure client, added as a submodule.
 ## 🌎 The Planetary System/Shoggoths Deli no.23
 
 **Planetary** is a Dojo world that connects other Dojo worlds.
@@ -191,9 +201,13 @@ cd dojo/pistols64
 
 This assumes that `planetary` and `pistols64` are deployed to the same katana as explained above.
 
+Fetch the TOT submodule.
+
 ```sh
-git clone --depth 1 --branch dojo_game_jam https://github.com/ArchetypalTech/TheOrugginTrail-DoJo.git 
+git submodule update --init --recursive
 ```
+
+Migrate TOT.
 
 ```sh
 cd TheOrugginTrail-Dojo
@@ -202,7 +216,7 @@ cd TheOrugginTrail-Dojo
 ## Interop P64 -> TOT
 You can send commands into `TheOrugginTrail` from `Pistols64` from the script below.
 
-__eg__ To call `TheOrugginTrail` from `Pistols64` with the command `look around`
+e.g. To call `TheOrugginTrail` from `Pistols64` with the command `look around`
 
 ```sh
 ./cmd_shoggoth path_to_pistols64_Scarb.toml look around
@@ -226,7 +240,6 @@ Assuming you are in the `TheOrugginTrail` directory, you can call `Pistols64` fr
 It wraps a command string "fight the man" which triggers the call from `TheOrugginTrail` world to the `Pistols64` world.
 
 
-  
 ## 💾 Run the shell terminal client
 
 See [clients/terminal/README.md](clients/terminal/README.md).
