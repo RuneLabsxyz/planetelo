@@ -1,0 +1,4 @@
+[submodule "dojo/TheOrugginTrail-DoJo"]
+	path = dojo/TheOrugginTrail-DoJo
+	url = https://github.com/ArchetypalTech/TheOrugginTrail-DoJo.git
+	branch = shoggoths-deli
