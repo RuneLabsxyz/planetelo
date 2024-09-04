@@ -24,7 +24,7 @@ We hope and beleive that this will allow for the emergence of complex, evolving 
 
 ## :raised_hand: Why now?
 
-It doesnt exist as yet. If we are working on worlds and we want to compose then we need to know about each other and right now that means we need to hard code the addresses of each others worlds (fine but also  annoying). Let's just have a place to publish and discover them.
+It doesn't exist as yet. If we are working on worlds and we want to compose them we need to know about each other and right now that means we need to hard code the addresses of each others worlds (fine but also  annoying). Let's just have a place to publish and discover them.
 
 ## :hammer: How do we build it?
 
