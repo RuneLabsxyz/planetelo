@@ -7,11 +7,6 @@ use planetary_interface::interfaces::planetary::{
     IPlanetaryActionsDispatcher, IPlanetaryActionsDispatcherTrait,
 };
 
-use planetary_interface::interfaces::tot::{
-    ToTInterface, ToTInterfaceTrait,
-    IToTActionsDispatcher, IToTActionsDispatcherTrait,
-};
-
 // for planetary interface
 #[derive(Copy, Drop, Serde)]
 struct ChallengeResults {

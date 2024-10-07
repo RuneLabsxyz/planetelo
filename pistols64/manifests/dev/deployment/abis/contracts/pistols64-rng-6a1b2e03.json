@@ -128,166 +128,49 @@
   },
   {
     "type": "impl",
-    "name": "IDojoInitImpl",
-    "interface_name": "pistols64::systems::actions::actions::IDojoInit"
+    "name": "RngImpl",
+    "interface_name": "pistols64::systems::rng::IRng"
   },
   {
     "type": "interface",
-    "name": "pistols64::systems::actions::actions::IDojoInit",
+    "name": "pistols64::systems::rng::IRng",
+    "items": [
+      {
+        "type": "function",
+        "name": "reseed",
+        "inputs": [
+          {
+            "name": "seed",
+            "type": "core::integer::u128"
+          },
+          {
+            "name": "salt",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::integer::u128"
+          }
+        ],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "IDojoInitImpl",
+    "interface_name": "pistols64::systems::rng::rng::IDojoInit"
+  },
+  {
+    "type": "interface",
+    "name": "pistols64::systems::rng::rng::IDojoInit",
     "items": [
       {
         "type": "function",
         "name": "dojo_init",
         "inputs": [],
         "outputs": [],
-        "state_mutability": "external"
-      }
-    ]
-  },
-  {
-    "type": "impl",
-    "name": "ActionsImpl",
-    "interface_name": "pistols64::systems::actions::IActions"
-  },
-  {
-    "type": "struct",
-    "name": "core::array::Span::<core::integer::u8>",
-    "members": [
-      {
-        "name": "snapshot",
-        "type": "@core::array::Array::<core::integer::u8>"
-      }
-    ]
-  },
-  {
-    "type": "enum",
-    "name": "core::bool",
-    "variants": [
-      {
-        "name": "False",
-        "type": "()"
-      },
-      {
-        "name": "True",
-        "type": "()"
-      }
-    ]
-  },
-  {
-    "type": "struct",
-    "name": "pistols64::models::challenge::ChallengeResults",
-    "members": [
-      {
-        "name": "duel_id",
-        "type": "core::integer::u128"
-      },
-      {
-        "name": "duelist_name_a",
-        "type": "core::felt252"
-      },
-      {
-        "name": "duelist_name_b",
-        "type": "core::felt252"
-      },
-      {
-        "name": "message",
-        "type": "core::felt252"
-      },
-      {
-        "name": "moves_a",
-        "type": "core::array::Span::<core::integer::u8>"
-      },
-      {
-        "name": "moves_b",
-        "type": "core::array::Span::<core::integer::u8>"
-      },
-      {
-        "name": "is_finished",
-        "type": "core::bool"
-      },
-      {
-        "name": "winner",
-        "type": "core::integer::u8"
-      }
-    ]
-  },
-  {
-    "type": "interface",
-    "name": "pistols64::systems::actions::IActions",
-    "items": [
-      {
-        "type": "function",
-        "name": "create_challenge",
-        "inputs": [
-          {
-            "name": "duelist_name_a",
-            "type": "core::felt252"
-          },
-          {
-            "name": "duelist_name_b",
-            "type": "core::felt252"
-          },
-          {
-            "name": "message",
-            "type": "core::felt252"
-          }
-        ],
-        "outputs": [
-          {
-            "type": "core::integer::u128"
-          }
-        ],
-        "state_mutability": "external"
-      },
-      {
-        "type": "function",
-        "name": "move",
-        "inputs": [
-          {
-            "name": "duel_id",
-            "type": "core::integer::u128"
-          },
-          {
-            "name": "round_number",
-            "type": "core::integer::u8"
-          },
-          {
-            "name": "duelist_name",
-            "type": "core::felt252"
-          },
-          {
-            "name": "moves",
-            "type": "core::array::Span::<core::integer::u8>"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "external"
-      },
-      {
-        "type": "function",
-        "name": "get_challenge_results",
-        "inputs": [
-          {
-            "name": "duel_id",
-            "type": "core::integer::u128"
-          }
-        ],
-        "outputs": [
-          {
-            "type": "pistols64::models::challenge::ChallengeResults"
-          }
-        ],
-        "state_mutability": "view"
-      },
-      {
-        "type": "function",
-        "name": "live_long",
-        "inputs": [],
-        "outputs": [
-          {
-            "type": "core::felt252"
-          }
-        ],
         "state_mutability": "view"
       }
     ]
@@ -341,7 +224,7 @@
   },
   {
     "type": "event",
-    "name": "pistols64::systems::actions::actions::Event",
+    "name": "pistols64::systems::rng::rng::Event",
     "kind": "enum",
     "variants": [
       {

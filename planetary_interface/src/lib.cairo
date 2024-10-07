@@ -4,7 +4,6 @@ mod interfaces {
     // public planets
     mod pistols64;
     mod vulcan; // test planet
-    mod tot;
 }
 
 mod systems {
@@ -16,12 +15,3 @@ mod utils {
     mod systems;
 }
 
-mod components {
-    mod planetary;
-}
-
-#[cfg(test)]
-mod tests {
-    mod test_component;
-    mod mock_component;
-}
