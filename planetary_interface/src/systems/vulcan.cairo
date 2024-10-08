@@ -2,7 +2,6 @@ use starknet::{ContractAddress};
 
 #[dojo::interface]
 trait IVulcan {
-    fn init(world: @IWorldDispatcher, planetary_world_address: ContractAddress);
     fn live_long(world: @IWorldDispatcher) -> felt252;
 }
 
@@ -29,12 +28,6 @@ mod salute {
 
     #[abi(embed_v0)]
     impl IVulcanImpl of IVulcan<ContractState> {
-        
-        // custom init for testing only
-        fn init(world: @IWorldDispatcher, planetary_world_address: ContractAddress) {
-            let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new_custom(planetary_world_address);
-            planetary.dispatcher().register(VulcanInterfaceTrait::NAMESPACE, world.contract_address);
-        }
 
         // salute
         fn live_long(world: @IWorldDispatcher) -> felt252 {

@@ -1,10 +1,10 @@
 [world]
 kind = "WorldContract"
-class_hash = "0x3715f072aa1c07be724249fcda8b0322687f6c5c585eebc4402d162649c707c"
-original_class_hash = "0x3715f072aa1c07be724249fcda8b0322687f6c5c585eebc4402d162649c707c"
+class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
+original_class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
 abi = "manifests/dev/deployment/abis/dojo-world.json"
-address = "0x783e2bc93ef51a73a6af04907e765f83e20c68e58a2b55b4f0c4a397c51b5b5"
-transaction_hash = "0x383b11cdf9f3a3dbe4e5255075aa0aee344fb64e3740c0b6c9aa53dac72f780"
+address = "0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369"
+transaction_hash = "0x5227d3d2065742525f03c721ed879054d5519d5bdc5dc6617123cc67f2e29bd"
 block_number = 3
 seed = "planetary"
 manifest_name = "dojo-world"
@@ -23,9 +23,9 @@ manifest_name = "dojo-base"
 
 [[contracts]]
 kind = "DojoContract"
-address = "0x763ba92739cfc1a31b66a935e44703fc3e9fb2530c7f92173d0cc35a30b164a"
-class_hash = "0xc0d2fa0937cfbced755e5e242f62c6ff383c5fe23bfb489b6c1946a7afc911"
-original_class_hash = "0xc0d2fa0937cfbced755e5e242f62c6ff383c5fe23bfb489b6c1946a7afc911"
+address = "0x1e75aefa24eed43893f319479f627b9012179917961c4331bb428872de614"
+class_hash = "0x7ca8452d6103f78a2045c7601d95f426b56770880e1e93f1a27757cbc95667a"
+original_class_hash = "0x7ca8452d6103f78a2045c7601d95f426b56770880e1e93f1a27757cbc95667a"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/planetary-planetary_actions-3d857935.json"
 reads = []
@@ -40,16 +40,16 @@ manifest_name = "planetary-planetary_actions-3d857935"
 
 [[contracts]]
 kind = "DojoContract"
-address = "0x165befbc519b64aed4c147b14627a3f340c56daa6a95061b99dba0fc61e438f"
-class_hash = "0x49fe7e0e03a16bed6763aa3e20a8b9542baec7803bfab4330082fa1ad55fef4"
-original_class_hash = "0x49fe7e0e03a16bed6763aa3e20a8b9542baec7803bfab4330082fa1ad55fef4"
+address = "0x35c0a11f2918604cddf7dbba8e8b838bfc419416110e13bc6889c14ccc0d85a"
+class_hash = "0xd4ad1e2d8fbd05fcf2f3a539e4c350c0363319a26cdf478829e62e5f4d364a"
+original_class_hash = "0xd4ad1e2d8fbd05fcf2f3a539e4c350c0363319a26cdf478829e62e5f4d364a"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/vulcan-salute-263286e5.json"
 reads = []
 writes = []
 init_calldata = []
 tag = "vulcan-salute"
-systems = ["init"]
+systems = []
 manifest_name = "vulcan-salute-263286e5"
 
 [[models]]

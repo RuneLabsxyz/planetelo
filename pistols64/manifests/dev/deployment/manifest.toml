@@ -1,10 +1,10 @@
 [world]
 kind = "WorldContract"
-class_hash = "0x3715f072aa1c07be724249fcda8b0322687f6c5c585eebc4402d162649c707c"
-original_class_hash = "0x3715f072aa1c07be724249fcda8b0322687f6c5c585eebc4402d162649c707c"
+class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
+original_class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
 abi = "manifests/dev/deployment/abis/dojo-world.json"
-address = "0x57952d454a1152dce4b3fe13f128377e403b1987d0eab7b93bc8178d3f7e219"
-transaction_hash = "0xc993d186861cdabe9cade3bd83dadef011ee91a43faf1874a815ea4130accd"
+address = "0x204849b9183d23d62291d90c3bbf935c4bda78659fd91dcb6d42fc2e4f109de"
+transaction_hash = "0x106f617526657439d720008e6a8a69fbbf96763a241112e101c609f231e4c0d"
 block_number = 13
 seed = "pistols64-1"
 manifest_name = "dojo-world"
@@ -23,9 +23,9 @@ manifest_name = "dojo-base"
 
 [[contracts]]
 kind = "DojoContract"
-address = "0x3cbe76182dc3c32fdb22240f2d6f4b444624c1b7865ea7951f9ff9d06987b5c"
-class_hash = "0x2406e6375d3e8839084b8519f6ee524357c5a3399373966b7224e1580c0610"
-original_class_hash = "0x2406e6375d3e8839084b8519f6ee524357c5a3399373966b7224e1580c0610"
+address = "0x658a65db7d96b120dee55194fdd12c66052bc1a7f58751a3a83a97545f2b737"
+class_hash = "0x670b9c653ad6bb61afb1e9ea05ac2c3f831cbb92808a639d201f2ef6cc1b30b"
+original_class_hash = "0x670b9c653ad6bb61afb1e9ea05ac2c3f831cbb92808a639d201f2ef6cc1b30b"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/pistols64-actions-67633088.json"
 reads = []
@@ -40,9 +40,9 @@ manifest_name = "pistols64-actions-67633088"
 
 [[contracts]]
 kind = "DojoContract"
-address = "0x70fe3150c1f5ecd6abb3e1e34fdb0c67933af0cce0ed7ae77387eec5d4cbdc2"
-class_hash = "0x1319a3cda6d7ff385840e1a15ca45449d3ccdfde216e52bec42246d67919679"
-original_class_hash = "0x1319a3cda6d7ff385840e1a15ca45449d3ccdfde216e52bec42246d67919679"
+address = "0x98390681154ffe96f336720aa65e5310df2b66fe1ec3351bad9ec972085f25"
+class_hash = "0x1530ac6ce914d14580428a398d5f615c54b149291793ee152f91f4d538ddc9f"
+original_class_hash = "0x1530ac6ce914d14580428a398d5f615c54b149291793ee152f91f4d538ddc9f"
 base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
 abi = "manifests/dev/deployment/abis/contracts/pistols64-rng-6a1b2e03.json"
 reads = []

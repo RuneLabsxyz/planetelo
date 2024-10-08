@@ -28,7 +28,7 @@
     "items": [
       {
         "type": "function",
-        "name": "contract_name",
+        "name": "name",
         "inputs": [],
         "outputs": [
           {
@@ -153,18 +153,6 @@
     "type": "interface",
     "name": "planetary_interface::systems::vulcan::IVulcan",
     "items": [
-      {
-        "type": "function",
-        "name": "init",
-        "inputs": [
-          {
-            "name": "planetary_world_address",
-            "type": "core::starknet::contract_address::ContractAddress"
-          }
-        ],
-        "outputs": [],
-        "state_mutability": "view"
-      },
       {
         "type": "function",
         "name": "live_long",

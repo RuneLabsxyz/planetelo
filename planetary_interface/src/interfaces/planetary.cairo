@@ -21,7 +21,7 @@ impl PlanetaryInterfaceImpl of PlanetaryInterfaceTrait {
     const ACTIONS_SELECTOR: felt252 = selector_from_tag!("planetary-planetary_actions");
 
     fn WORLD_CONTRACT() -> ContractAddress {
-        (starknet::contract_address_const::<0x783e2bc93ef51a73a6af04907e765f83e20c68e58a2b55b4f0c4a397c51b5b5>())
+        (starknet::contract_address_const::<0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369>())
     }
     //
     // create a new interface

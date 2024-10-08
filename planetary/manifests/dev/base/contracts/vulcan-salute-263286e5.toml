@@ -1,11 +1,11 @@
 kind = "DojoContract"
-class_hash = "0x49fe7e0e03a16bed6763aa3e20a8b9542baec7803bfab4330082fa1ad55fef4"
-original_class_hash = "0x49fe7e0e03a16bed6763aa3e20a8b9542baec7803bfab4330082fa1ad55fef4"
+class_hash = "0xd4ad1e2d8fbd05fcf2f3a539e4c350c0363319a26cdf478829e62e5f4d364a"
+original_class_hash = "0xd4ad1e2d8fbd05fcf2f3a539e4c350c0363319a26cdf478829e62e5f4d364a"
 base_class_hash = "0x0"
 abi = "manifests/dev/base/abis/contracts/vulcan-salute-263286e5.json"
 reads = []
 writes = []
 init_calldata = []
 tag = "vulcan-salute"
-systems = ["init"]
+systems = []
 manifest_name = "vulcan-salute-263286e5"

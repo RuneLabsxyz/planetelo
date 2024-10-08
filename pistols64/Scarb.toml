@@ -7,7 +7,7 @@ cairo-version = "2.7.0"
 sierra-replace-ids = true
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.7" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.14" }
 # planetary = { git = "https://github.com/underware-gg/pistols-64", branch = "main" }
 planetary_interface = { path = "../planetary_interface" }
 
