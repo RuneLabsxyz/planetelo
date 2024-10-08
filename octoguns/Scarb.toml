@@ -1,0 +1,22 @@
+[package]
+cairo-version = "=2.7.0"
+name = "octoguns"
+version = "0.1.0"
+
+[cairo]
+sierra-replace-ids = true
+
+[scripts]
+migrate = "sozo build && sozo migrate apply"
+spawn = "./scripts/spawn.sh"
+move = "./scripts/move.sh"
+
+[dependencies]
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.12" }
+origami_algebra = { git = "https://github.com/dojoengine/origami" }
+alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
+
+[[target.dojo]]
+
+[namespace]
+default = "octoguns"

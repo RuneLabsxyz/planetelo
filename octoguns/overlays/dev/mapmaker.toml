@@ -1,0 +1,11 @@
+tag = "octoguns-mapmaker"
+writes = [
+    "octoguns-CharacterPosition",
+    "octoguns-CharacterModel",
+    "octoguns-Map",
+    "octoguns-Session",
+    "octoguns-SessionMeta",
+    "octoguns-Bullet",
+    "octoguns-Global",
+
+]
