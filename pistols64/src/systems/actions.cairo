@@ -10,7 +10,6 @@ trait IActions {
 
     // test vulcan interface
     fn live_long(world: @IWorldDispatcher) -> felt252;
-
 }
 
 
@@ -62,11 +61,10 @@ mod actions {
         const InvalidCaller: felt252 = 'PISTOLS64: Invalid caller';
     }
 
-    fn dojo_init(ref world: IWorldDispatcher) {
+    fn dojo_init(world: @IWorldDispatcher) {
         let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
         planetary.dispatcher().register(Pistols64InterfaceTrait::NAMESPACE, world.contract_address);
     }
-
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
@@ -153,6 +151,7 @@ mod actions {
             let vulcan: IVulcanSaluteDispatcher = VulcanInterfaceTrait::new().dispatcher();
             (vulcan.live_long())
         }
+
 
     }
 }

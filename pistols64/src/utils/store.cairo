@@ -43,12 +43,12 @@ impl StoreImpl of StoreTrait {
     fn set_challenge(self: Store, challenge: Challenge) {
         // set!(self.world, (challenge));
         // challenge.set(world); // ERROR
-        dojo::model::Model::<Challenge>::set(@challenge, self.world);
+        set!(self.world, (challenge));
     }
 
     #[inline(always)]
     fn set_round(self: Store, round: Round) {
-        dojo::model::Model::<Round>::set(@round, self.world);
+        set!(self.world, (round));
     }
 
 }

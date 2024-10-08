@@ -28,7 +28,7 @@
     "items": [
       {
         "type": "function",
-        "name": "contract_name",
+        "name": "name",
         "inputs": [],
         "outputs": [
           {
@@ -140,7 +140,7 @@
         "name": "dojo_init",
         "inputs": [],
         "outputs": [],
-        "state_mutability": "external"
+        "state_mutability": "view"
       }
     ]
   },

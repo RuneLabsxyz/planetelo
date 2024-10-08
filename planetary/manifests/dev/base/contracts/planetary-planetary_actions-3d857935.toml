@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0xc0d2fa0937cfbced755e5e242f62c6ff383c5fe23bfb489b6c1946a7afc911"
-original_class_hash = "0xc0d2fa0937cfbced755e5e242f62c6ff383c5fe23bfb489b6c1946a7afc911"
+class_hash = "0x7ca8452d6103f78a2045c7601d95f426b56770880e1e93f1a27757cbc95667a"
+original_class_hash = "0x7ca8452d6103f78a2045c7601d95f426b56770880e1e93f1a27757cbc95667a"
 base_class_hash = "0x0"
 abi = "manifests/dev/base/abis/contracts/planetary-planetary_actions-3d857935.json"
 reads = []
