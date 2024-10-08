@@ -363,40 +363,30 @@
   },
   {
     "type": "impl",
-    "name": "positionImpl",
-    "interface_name": "dojo_starter::models::Iposition"
+    "name": "eloImpl",
+    "interface_name": "matchmaking::models::elo::Ielo"
   },
   {
     "type": "struct",
-    "name": "dojo_starter::models::Vec2",
-    "members": [
-      {
-        "name": "x",
-        "type": "core::integer::u32"
-      },
-      {
-        "name": "y",
-        "type": "core::integer::u32"
-      }
-    ]
-  },
-  {
-    "type": "struct",
-    "name": "dojo_starter::models::Position",
+    "name": "matchmaking::models::elo::Elo",
     "members": [
       {
         "name": "player",
         "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "vec",
-        "type": "dojo_starter::models::Vec2"
+        "name": "game",
+        "type": "core::felt252"
+      },
+      {
+        "name": "value",
+        "type": "core::integer::u64"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "dojo_starter::models::Iposition",
+    "name": "matchmaking::models::elo::Ielo",
     "items": [
       {
         "type": "function",
@@ -404,7 +394,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "dojo_starter::models::Position"
+            "type": "matchmaking::models::elo::Elo"
           }
         ],
         "outputs": [],
@@ -414,7 +404,7 @@
   },
   {
     "type": "event",
-    "name": "dojo_starter::models::position::Event",
+    "name": "matchmaking::models::elo::elo::Event",
     "kind": "enum",
     "variants": []
   }

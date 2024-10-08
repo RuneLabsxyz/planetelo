@@ -60,6 +60,7 @@ trait IOctogunsStart<TState> {
         session_primitives: SessionPrimitives
     );
     fn join(ref self: TState, session_id: u32);
+    fn pew(ref self: TState) -> felt252;
 }
 
 #[starknet::interface]

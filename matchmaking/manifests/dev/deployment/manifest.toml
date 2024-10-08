@@ -1,0 +1,60 @@
+[world]
+kind = "WorldContract"
+class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
+original_class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
+abi = "manifests/dev/deployment/abis/dojo-world.json"
+address = "0x795930dddc8ceb4061ea4ec7c7ae5e0738c51ed584b4515dc1fb952bccd027a"
+transaction_hash = "0x58ba066bc3b0247a194720362bc0cc66062f2b22adadc11cffe8c9208feefb1"
+block_number = 45
+seed = "matchmaking"
+manifest_name = "dojo-world"
+
+[world.metadata]
+profile_name = "dev"
+rpc_url = "http://localhost:5050/"
+
+[base]
+kind = "Class"
+class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+original_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+abi = "manifests/dev/deployment/abis/dojo-base.json"
+tag = "dojo-base"
+manifest_name = "dojo-base"
+
+[[contracts]]
+kind = "DojoContract"
+address = "0x19ee6635981d8f4fb7b1f47775d0d9b2ec46bd6b56f387200c5b5d68e3de2f6"
+class_hash = "0x3cde4604fc69a14f047c3297f996b43afce6d9d9e420f9899c9c31a4a75525f"
+original_class_hash = "0x3cde4604fc69a14f047c3297f996b43afce6d9d9e420f9899c9c31a4a75525f"
+base_class_hash = "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2"
+abi = "manifests/dev/deployment/abis/contracts/matchmaking-actions-7c1ce329.json"
+reads = []
+writes = []
+init_calldata = []
+tag = "matchmaking-actions"
+systems = []
+manifest_name = "matchmaking-actions-7c1ce329"
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0xe7d289c00d1a4afcd4dad4e488623772215f5d61719f089eb32f6b752823d3"
+original_class_hash = "0xe7d289c00d1a4afcd4dad4e488623772215f5d61719f089eb32f6b752823d3"
+abi = "manifests/dev/deployment/abis/models/matchmaking-Elo-155b64e4.json"
+tag = "matchmaking-Elo"
+qualified_path = "matchmaking::models::elo::elo"
+manifest_name = "matchmaking-Elo-155b64e4"
+
+[[models.members]]
+name = "player"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "game"
+type = "felt252"
+key = true
+
+[[models.members]]
+name = "value"
+type = "u64"
+key = false

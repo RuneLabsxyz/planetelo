@@ -1,6 +1,3 @@
-tag = "dojo_starter-actions"
+tag = "matchmaking-actions"
 writes = [
-    "dojo_starter-Moves",
-    "dojo_starter-Position",
-    "dojo_starter-DirectionsAvailable",
 ]

@@ -10,6 +10,7 @@ trait IActions {
 
     // test vulcan interface
     fn live_long(world: @IWorldDispatcher) -> felt252;
+    fn pew(world: @IWorldDispatcher) -> felt252;
 }
 
 
@@ -150,6 +151,11 @@ mod actions {
             WORLD(world);
             let vulcan: IVulcanSaluteDispatcher = VulcanInterfaceTrait::new().dispatcher();
             (vulcan.live_long())
+        }
+
+        fn pew(world: @IWorldDispatcher) -> felt252 {
+            let octoguns: IOctogunsStartDispatcher = OctogunsInterfaceTrait::new().start_dispatcher();
+            (octoguns.pew())
         }
 
 

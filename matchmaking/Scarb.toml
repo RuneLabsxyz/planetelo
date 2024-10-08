@@ -1,6 +1,6 @@
 [package]
 cairo-version = "=2.7.0"
-name = "dojo_starter"
+name = "matchmaking"
 version = "0.1.0"
 
 [cairo]
@@ -8,10 +8,9 @@ sierra-replace-ids = true
 
 [scripts]
 migrate = "sozo build && sozo migrate apply"
-spawn = "./scripts/spawn.sh"
-move = "./scripts/move.sh"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.12" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.14" }
+planetary_interface = { path = "../planetary_interface" }
 
 [[target.dojo]]

@@ -13,6 +13,7 @@ trait IStart {
         session_primitives: SessionPrimitives
     );
     fn join(ref world: IWorldDispatcher, session_id: u32);
+    fn pew(world: @IWorldDispatcher) -> felt252;
 }
 
 #[dojo::contract]
@@ -82,6 +83,10 @@ mod start {
             player.games.append(session.session_id);
 
             set!(world, (session, player, global));
+        }
+
+        fn pew(world: @IWorldDispatcher) -> felt252 {
+           ('pew')
         }
     }
 }
