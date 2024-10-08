@@ -1,0 +1,37 @@
+kind = "DojoModel"
+class_hash = "0x557c8f93ab95b683d7a467f9838893a63a782bd65a4d747a96ad2630c9789cd"
+original_class_hash = "0x557c8f93ab95b683d7a467f9838893a63a782bd65a4d747a96ad2630c9789cd"
+abi = "manifests/dev/base/abis/models/octoguns-SessionPrimitives-29e33ecc.json"
+tag = "octoguns-SessionPrimitives"
+qualified_path = "octoguns::models::sessions::session_primitives"
+manifest_name = "octoguns-SessionPrimitives-29e33ecc"
+
+[[members]]
+name = "session_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "bullet_speed"
+type = "u64"
+key = false
+
+[[members]]
+name = "bullet_sub_steps"
+type = "u32"
+key = false
+
+[[members]]
+name = "bullets_per_turn"
+type = "u32"
+key = false
+
+[[members]]
+name = "sub_moves_per_turn"
+type = "u32"
+key = false
+
+[[members]]
+name = "max_distance_per_sub_move"
+type = "u32"
+key = false

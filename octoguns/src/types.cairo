@@ -8,7 +8,7 @@ struct Vec2 {
 #[derive(Copy, Drop, Serde, Introspect)]
 struct Shot {
     angle: u64, // 0 to 360
-    step: u8,
+    step: u32,
 }
 
 #[derive(Clone, Drop, Serde, Introspect)]

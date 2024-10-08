@@ -1,5 +1,6 @@
 use starknet::ContractAddress;
 use octoguns::types::Vec2;
+use octoguns::consts::{STEP_COUNT};
 
 #[derive(Drop, Serde)]
 #[dojo::model]
@@ -13,8 +14,10 @@ pub struct CharacterModel {
 
 #[generate_trait]
 impl CharacterModelImpl of CharacterModelTrait {
-    fn new(id: u32, session_id: u32, player_id: ContractAddress, steps_amount: u32) -> CharacterModel {
-        CharacterModel {entity_id: id, session_id, player_id, steps_amount}
+    fn new(
+        id: u32, session_id: u32, player_id: ContractAddress, steps_amount: u32
+    ) -> CharacterModel {
+        CharacterModel { entity_id: id, session_id, player_id, steps_amount }
     }
 }
 
@@ -31,7 +34,7 @@ pub struct CharacterPosition {
 
 #[generate_trait]
 impl CharacterPositionImpl of CharacterPositionTrait {
-    fn new(id: u32, coords: Vec2) -> CharacterPosition {
-        CharacterPosition {id, coords, max_steps: 100, current_step: 0}
+    fn new(id: u32, coords: Vec2, sub_moves_per_turn: u32) -> CharacterPosition {
+        CharacterPosition { id, coords, max_steps: sub_moves_per_turn, current_step: 0 }
     }
 }

@@ -72,11 +72,11 @@ fn filter_out_dead_characters(
 }
 
 
-fn check_is_valid_move(v:IVec2) -> bool {
-    if (v.x*v.x) + (v.y*v.y) <= MOVE_SPEED*MOVE_SPEED {
+fn check_is_valid_move(v: IVec2, max_distance_per_sub_move: u32) -> bool {
+    if (v.x * v.x)
+        + (v.y * v.y) <= max_distance_per_sub_move.into() * max_distance_per_sub_move.into() {
         return true;
-    }
-    else {
+    } else {
         println!("invalid move");
         return false;
     }

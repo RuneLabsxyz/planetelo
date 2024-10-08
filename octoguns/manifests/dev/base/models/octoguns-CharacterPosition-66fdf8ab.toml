@@ -1,0 +1,27 @@
+kind = "DojoModel"
+class_hash = "0x67e24ab3c6231d59ebfa89355dc6723dd98f47baf73c048e9f64791c9e26e59"
+original_class_hash = "0x67e24ab3c6231d59ebfa89355dc6723dd98f47baf73c048e9f64791c9e26e59"
+abi = "manifests/dev/base/abis/models/octoguns-CharacterPosition-66fdf8ab.json"
+tag = "octoguns-CharacterPosition"
+qualified_path = "octoguns::models::characters::character_position"
+manifest_name = "octoguns-CharacterPosition-66fdf8ab"
+
+[[members]]
+name = "id"
+type = "u32"
+key = true
+
+[[members]]
+name = "coords"
+type = "Vec2"
+key = false
+
+[[members]]
+name = "max_steps"
+type = "u32"
+key = false
+
+[[members]]
+name = "current_step"
+type = "u32"
+key = false
