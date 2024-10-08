@@ -12,9 +12,10 @@ spawn = "./scripts/spawn.sh"
 move = "./scripts/move.sh"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.13" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.14" }
 origami_algebra = { git = "https://github.com/dojoengine/origami" }
 alexandria_math = { git = "https://github.com/keep-starknet-strange/alexandria.git" }
+planetary_interface = { path = "../planetary_interface" }
 
 [[target.dojo]]
 

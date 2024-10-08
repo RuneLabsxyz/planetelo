@@ -19,7 +19,19 @@ mod actions {
     use octoguns::lib::simulate::{simulate_bullets};
     use starknet::{ContractAddress, get_caller_address};
     use core::cmp::{max, min};
+    use planetary_interface::interfaces::planetary::{
+        PlanetaryInterface, PlanetaryInterfaceTrait,
+        IPlanetaryActionsDispatcherTrait,
+    };
+    use planetary_interface::interfaces::octoguns::{
+        OctogunsInterface, OctogunsInterfaceTrait
+    };
 
+
+    fn dojo_init(ref world: IWorldDispatcher) {
+        let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
+        planetary.dispatcher().register(OctogunsInterfaceTrait::NAMESPACE, world.contract_address);
+    }
 
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {

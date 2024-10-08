@@ -26,7 +26,7 @@ mod start {
     use octoguns::models::global::{Global, GlobalTrait};
     use octoguns::consts::GLOBAL_KEY;
     use octoguns::models::player::{Player};
-
+ 
     #[abi(embed_v0)]
     impl StartImpl of IStart<ContractState> {
         fn create(ref world: IWorldDispatcher, map_id: u32, session_primitives: SessionPrimitives) -> u32 {
