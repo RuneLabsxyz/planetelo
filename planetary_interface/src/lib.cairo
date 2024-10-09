@@ -5,6 +5,7 @@ mod interfaces {
     mod pistols64;
     mod vulcan; // test planet
     mod octoguns;
+    mod one_on_one;
 }
 
 mod systems {

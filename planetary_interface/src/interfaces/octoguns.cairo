@@ -17,10 +17,8 @@ pub struct SessionMeta {
     pub bullets: Array<u32>,
 }
 
-#[derive(Copy, Drop, Serde)]
-pub struct SessionPrimitives {
-    #[key]
-    pub session_id: u32,
+#[derive(Copy, Drop, Serde, Introspect)]
+pub struct Settings {
     pub bullet_speed: u64,
     pub bullet_sub_steps: u32,
     pub bullets_per_turn: u32,
@@ -51,14 +49,14 @@ struct IVec2 {
 #[starknet::interface]
 trait IOctogunsStart<TState> {
 
-    fn create(ref self: TState, map_id: u32, session_primitives: SessionPrimitives) -> u32;
+    fn create(ref self: TState, map_id: u32, settings: Settings) -> u32;
     fn create_closed(
         ref self: TState,
         map_id: u32,
         player_address_1: ContractAddress,
         player_address_2: ContractAddress,
-        session_primitives: SessionPrimitives
-    );
+        settings: Settings
+    ) -> u32;
     fn join(ref self: TState, session_id: u32);
     fn pew(ref self: TState) -> felt252;
 }

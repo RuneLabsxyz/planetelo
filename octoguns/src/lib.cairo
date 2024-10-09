@@ -20,6 +20,11 @@ mod lib {
     mod helpers;
     mod simulate;
     mod trig;
+    mod dice;
+}
+
+mod planetelo {
+    mod planetelo;
 }
 
 mod tests {

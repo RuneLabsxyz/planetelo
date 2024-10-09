@@ -41,5 +41,5 @@
   },
   // "cairo1.languageServerPath": "${userHome}/.dojo/bin/dojo-language-server",
   "cairo1.enableLanguageServer": false,
-  "cairo1.enableScarb": false
+  "cairo1.enableScarb": true
 }

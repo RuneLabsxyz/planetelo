@@ -26,7 +26,7 @@ mod spawn {
             let mut session_meta = get!(world, session_id, (SessionMeta));
             assert!(caller == session.player1 || caller == session.player2, "Not player");
 
-            let mut session_primitives = get!(world, session_id, (SessionPrimitives));
+            let mut session_primitives = get!(world, session_id, (SessionPrimitives)).settings;
 
             let id1 = world.uuid();
 

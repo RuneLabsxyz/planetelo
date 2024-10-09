@@ -36,7 +36,7 @@ mod actions {
     #[abi(embed_v0)]
     impl ActionsImpl of IActions<ContractState> {
         fn move(ref world: IWorldDispatcher, session_id: u32, mut moves: TurnMove) {
-            let session_primitives = get!(world, session_id, (SessionPrimitives));
+            let session_primitives = get!(world, session_id, (SessionPrimitives)).settings;
             let max_steps = session_primitives.sub_moves_per_turn;
 
             assert!(moves.shots.len() <= session_primitives.bullets_per_turn, "Invalid number of shots");
@@ -51,8 +51,6 @@ mod actions {
             let map = get!(world, session.map_id, (Map));
 
             let mut updated_bullet_ids = ArrayTrait::new();
-
-            let session_primitives = get!(world, session_id, (SessionPrimitives));
 
             let mut player_character_id = 0;
             let mut opp_character_id = 0;

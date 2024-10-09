@@ -1,5 +1,6 @@
 use starknet::{ContractAddress, contract_address_const};
 use octoguns::consts::{BULLET_SPEED, BULLET_SUBSTEPS, MOVE_SPEED, STEP_COUNT};
+use octoguns::types::Settings;
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
@@ -62,27 +63,19 @@ impl SessionMetaImpl of SessionMetaTrait {
 pub struct SessionPrimitives {
     #[key]
     pub session_id: u32,
-    pub bullet_speed: u64,
-    pub bullet_sub_steps: u32,
-    pub bullets_per_turn: u32,
-    pub sub_moves_per_turn: u32,
-    pub max_distance_per_sub_move: u32,
+    pub settings: Settings
 }
 
 #[generate_trait]
 impl SessionPrimitivesImpl of SessionPrimitivesTrait {
 
-    fn new_from(
+    fn new(
         session_id: u32,
-        from: SessionPrimitives
+        settings: Settings
     ) -> SessionPrimitives {
         SessionPrimitives {
             session_id,
-            bullet_speed: from.bullet_speed,
-            bullet_sub_steps: from.bullet_sub_steps,
-            bullets_per_turn: from.bullets_per_turn,
-            sub_moves_per_turn: from.sub_moves_per_turn,
-            max_distance_per_sub_move: from.max_distance_per_sub_move
+            settings
         }
     }
 }
