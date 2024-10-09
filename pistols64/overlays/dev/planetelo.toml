@@ -1,0 +1,4 @@
+tag = "pistols64_planetelo-planetelo"
+writes = [
+  "pistols64_planetelo-Player",
+]

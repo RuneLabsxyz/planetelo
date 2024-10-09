@@ -32,6 +32,10 @@ mod actions {
         IVulcanSaluteDispatcher, IVulcanSaluteDispatcherTrait,
     };
     
+    use planetary_interface::interfaces::octoguns::{
+        OctogunsInterface, OctogunsInterfaceTrait,
+        IOctogunsStartDispatcher, IOctogunsStartDispatcherTrait,
+    };
 
     use planetary_interface::utils::misc::{WORLD};
 

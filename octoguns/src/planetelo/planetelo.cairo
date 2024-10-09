@@ -56,12 +56,12 @@ mod planetelo {
 
     #[abi(embed_v0)]
     impl OneOnOneImpl of IOneOnOne<ContractState> {
-        fn create_match(ref world: IWorldDispatcher, p1: ContractAddress, p2: ContractAddress, playlist_id: u32) -> u32{
+        fn create_match(ref world: IWorldDispatcher, p1: ContractAddress, p2: ContractAddress, playlist_id: u128) -> u128{
             let octoguns_interface = OctogunsInterfaceTrait::new();
             let start_dispatcher: IOctogunsStartDispatcher = octoguns_interface.start_dispatcher();
 
             let global = get!(world, GLOBAL_KEY, (PlaylistGlobal));
-            assert!(playlist_id < global.playlist_count, "Playlist does not exist");
+            assert!(playlist_id < global.playlist_count.into(), "Playlist does not exist");
 
             let playlist = get!(world, playlist_id, (Playlist));
 
@@ -73,11 +73,11 @@ mod planetelo {
 
             let map_id = playlist.maps[map_index];
 
-            let id: u32 = start_dispatcher.create_closed(*map_id, p1, p2, playlist.settings);
+            let id: u128 = start_dispatcher.create_closed(*map_id, p1, p2, playlist.settings).into();
             id
         }
 
-        fn settle_match(ref world: IWorldDispatcher, match_id: u32) -> Status {
+        fn settle_match(ref world: IWorldDispatcher, match_id: u128) -> Status {
             let session = get!(world, match_id, (Session));
             let session_meta = get!(world, match_id, (SessionMeta));
 

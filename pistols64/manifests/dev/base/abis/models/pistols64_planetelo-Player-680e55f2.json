@@ -363,198 +363,26 @@
   },
   {
     "type": "impl",
-    "name": "roundImpl",
-    "interface_name": "pistols64::models::round::Iround"
-  },
-  {
-    "type": "enum",
-    "name": "pistols64::types::cards::paces::PacesCard",
-    "variants": [
-      {
-        "name": "Null",
-        "type": "()"
-      },
-      {
-        "name": "Paces1",
-        "type": "()"
-      },
-      {
-        "name": "Paces2",
-        "type": "()"
-      },
-      {
-        "name": "Paces3",
-        "type": "()"
-      },
-      {
-        "name": "Paces4",
-        "type": "()"
-      },
-      {
-        "name": "Paces5",
-        "type": "()"
-      },
-      {
-        "name": "Paces6",
-        "type": "()"
-      },
-      {
-        "name": "Paces7",
-        "type": "()"
-      },
-      {
-        "name": "Paces8",
-        "type": "()"
-      },
-      {
-        "name": "Paces9",
-        "type": "()"
-      },
-      {
-        "name": "Paces10",
-        "type": "()"
-      }
-    ]
-  },
-  {
-    "type": "enum",
-    "name": "pistols64::types::cards::tactics::TacticsCard",
-    "variants": [
-      {
-        "name": "Null",
-        "type": "()"
-      },
-      {
-        "name": "Insult",
-        "type": "()"
-      },
-      {
-        "name": "CoinToss",
-        "type": "()"
-      },
-      {
-        "name": "Vengeful",
-        "type": "()"
-      },
-      {
-        "name": "ThickCoat",
-        "type": "()"
-      },
-      {
-        "name": "Reversal",
-        "type": "()"
-      },
-      {
-        "name": "Bananas",
-        "type": "()"
-      }
-    ]
-  },
-  {
-    "type": "enum",
-    "name": "pistols64::types::cards::blades::BladesCard",
-    "variants": [
-      {
-        "name": "Null",
-        "type": "()"
-      },
-      {
-        "name": "Seppuku",
-        "type": "()"
-      },
-      {
-        "name": "RunAway",
-        "type": "()"
-      },
-      {
-        "name": "Behead",
-        "type": "()"
-      },
-      {
-        "name": "Grapple",
-        "type": "()"
-      }
-    ]
+    "name": "playerImpl",
+    "interface_name": "pistols64::planetelo::planetelo::Iplayer"
   },
   {
     "type": "struct",
-    "name": "pistols64::models::round::Shot",
+    "name": "pistols64::planetelo::planetelo::Player",
     "members": [
       {
-        "name": "card_paces",
-        "type": "pistols64::types::cards::paces::PacesCard"
+        "name": "address",
+        "type": "core::starknet::contract_address::ContractAddress"
       },
       {
-        "name": "card_dodge",
-        "type": "pistols64::types::cards::paces::PacesCard"
-      },
-      {
-        "name": "card_tactics",
-        "type": "pistols64::types::cards::tactics::TacticsCard"
-      },
-      {
-        "name": "card_blades",
-        "type": "pistols64::types::cards::blades::BladesCard"
-      },
-      {
-        "name": "initial_health",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "initial_damage",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "initial_chances",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "final_health",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "final_damage",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "final_chances",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "dice_crit",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "win",
-        "type": "core::integer::u8"
-      }
-    ]
-  },
-  {
-    "type": "struct",
-    "name": "pistols64::models::round::Round",
-    "members": [
-      {
-        "name": "duel_id",
-        "type": "core::integer::u128"
-      },
-      {
-        "name": "round_number",
-        "type": "core::integer::u8"
-      },
-      {
-        "name": "shot_a",
-        "type": "pistols64::models::round::Shot"
-      },
-      {
-        "name": "shot_b",
-        "type": "pistols64::models::round::Shot"
+        "name": "name",
+        "type": "core::felt252"
       }
     ]
   },
   {
     "type": "interface",
-    "name": "pistols64::models::round::Iround",
+    "name": "pistols64::planetelo::planetelo::Iplayer",
     "items": [
       {
         "type": "function",
@@ -562,7 +390,7 @@
         "inputs": [
           {
             "name": "model",
-            "type": "pistols64::models::round::Round"
+            "type": "pistols64::planetelo::planetelo::Player"
           }
         ],
         "outputs": [],
@@ -572,7 +400,7 @@
   },
   {
     "type": "event",
-    "name": "pistols64::models::round::round::Event",
+    "name": "pistols64::planetelo::planetelo::player::Event",
     "kind": "enum",
     "variants": []
   }

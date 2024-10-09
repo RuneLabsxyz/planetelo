@@ -1,0 +1,6 @@
+tag = "octoguns-planetelo"
+writes = [
+    "octoguns_planetelo-Playlist",
+    "octoguns_planetelo-PlaylistMeta",
+
+]

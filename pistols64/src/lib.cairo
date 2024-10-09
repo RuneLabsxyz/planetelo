@@ -9,6 +9,10 @@ mod models {
     mod round;
 }
 
+mod planetelo {
+    mod planetelo;
+}
+
 mod types {
     mod constants;
     mod state;

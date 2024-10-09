@@ -128,24 +128,73 @@
   },
   {
     "type": "impl",
-    "name": "RngImpl",
-    "interface_name": "pistols64::systems::rng::IRng"
+    "name": "PlaneteloInterfaceImpl",
+    "interface_name": "pistols64::planetelo::planetelo::IPlanetelo"
   },
   {
     "type": "interface",
-    "name": "pistols64::systems::rng::IRng",
+    "name": "pistols64::planetelo::planetelo::IPlanetelo",
     "items": [
       {
         "type": "function",
-        "name": "reseed",
+        "name": "register_player",
         "inputs": [
           {
-            "name": "seed",
-            "type": "core::integer::u128"
+            "name": "name",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "OneOnOneImpl",
+    "interface_name": "planetary_interface::interfaces::one_on_one::IOneOnOne"
+  },
+  {
+    "type": "enum",
+    "name": "planetary_interface::interfaces::one_on_one::Status",
+    "variants": [
+      {
+        "name": "None",
+        "type": "()"
+      },
+      {
+        "name": "Active",
+        "type": "()"
+      },
+      {
+        "name": "Draw",
+        "type": "()"
+      },
+      {
+        "name": "Winner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "type": "interface",
+    "name": "planetary_interface::interfaces::one_on_one::IOneOnOne",
+    "items": [
+      {
+        "type": "function",
+        "name": "create_match",
+        "inputs": [
+          {
+            "name": "p1",
+            "type": "core::starknet::contract_address::ContractAddress"
           },
           {
-            "name": "salt",
-            "type": "core::felt252"
+            "name": "p2",
+            "type": "core::starknet::contract_address::ContractAddress"
+          },
+          {
+            "name": "playlist_id",
+            "type": "core::integer::u128"
           }
         ],
         "outputs": [
@@ -153,18 +202,34 @@
             "type": "core::integer::u128"
           }
         ],
-        "state_mutability": "view"
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "settle_match",
+        "inputs": [
+          {
+            "name": "match_id",
+            "type": "core::integer::u128"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "planetary_interface::interfaces::one_on_one::Status"
+          }
+        ],
+        "state_mutability": "external"
       }
     ]
   },
   {
     "type": "impl",
     "name": "IDojoInitImpl",
-    "interface_name": "pistols64::systems::rng::rng::IDojoInit"
+    "interface_name": "pistols64::planetelo::planetelo::planetelo::IDojoInit"
   },
   {
     "type": "interface",
-    "name": "pistols64::systems::rng::rng::IDojoInit",
+    "name": "pistols64::planetelo::planetelo::planetelo::IDojoInit",
     "items": [
       {
         "type": "function",
@@ -224,7 +289,7 @@
   },
   {
     "type": "event",
-    "name": "pistols64::systems::rng::rng::Event",
+    "name": "pistols64::planetelo::planetelo::planetelo::Event",
     "kind": "enum",
     "variants": [
       {
