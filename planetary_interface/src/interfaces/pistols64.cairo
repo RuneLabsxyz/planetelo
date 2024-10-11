@@ -67,4 +67,5 @@ impl Pistols64InterfaceImpl of Pistols64InterfaceTrait {
             contract_address: get_world_contract_address(self.world, Self::ACTIONS_SELECTOR)
         })
     }
+
 }

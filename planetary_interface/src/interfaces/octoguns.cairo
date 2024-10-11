@@ -85,7 +85,7 @@ impl OctogunsInterfaceImpl of OctogunsInterfaceTrait {
     const ACTIONS_SELECTOR: felt252 = selector_from_tag!("octoguns-actions");
     const START_SELECTOR: felt252 = selector_from_tag!("octoguns-start");
     const SPAWN_SELECTOR: felt252 = selector_from_tag!("octoguns-spawn");
-
+    
     fn new() -> OctogunsInterface {
         let world_address: ContractAddress = PlanetaryInterfaceTrait::new().dispatcher().get_world_address(Self::NAMESPACE);
         (OctogunsInterface{
@@ -112,4 +112,5 @@ impl OctogunsInterfaceImpl of OctogunsInterfaceTrait {
             contract_address: get_world_contract_address(self.world, Self::SPAWN_SELECTOR)
         })
     }   
+
 }

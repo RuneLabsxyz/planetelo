@@ -14,3 +14,5 @@ mod interfaces {
 mod tests {
     mod test_world;
 }
+
+mod consts;

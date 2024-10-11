@@ -16,23 +16,74 @@ mod queue {
         IPlanetaryActionsDispatcher, IPlanetaryActionsDispatcherTrait,
     };
 
-    use planetary_interface::interfaces::octoguns::{
-        OctogunsInterface, OctogunsInterfaceTrait,
-        IOctogunsStartDispatcher, IOctogunsStartDispatcherTrait,
+    use planetary_interface::interfaces::one_on_one::{
+        IOneOnOneDispatcher, IOneOnOneDispatcherTrait,
     };
+
+    use planetary_interface::utils::systems::{get_world_contract_address};
+
+    use planetelo::models::elo::{Status, QueueStatus, Elo};
 
     #[abi(embed_v0)]
     impl QueueImpl of IQueue<ContractState> {
         
 
         fn queue(world: @IWorldDispatcher, playlist: felt252) {
-            let planetary: IPlanetaryActionsDispatcher = PlanetaryInterfaceTrait::new().dispatcher();
+            let address = get_caller_address();
+            let player = get!(world, (address, playlist), Status);
+
+            assert!(player.status == QueueStatus::None, error("Player is already in the queue"));
+
+            let elo = get!(world, (address, playlist), Elo);
+
+            let mut queue = get!(world, playlist, Queue);
+            
+            let new = QueueIndex {
+                game: playlist,
+                index: queue.length,
+                player: address
+            };
+
+            queue.length += 1;
+            player.status = QueueStatus::Queued;
+
+            set!(world, (player, new, queue));
+            
         }
 
 
         fn dequeue(world: @IWorldDispatcher, playlist: felt252) {
-            let planetary: IPlanetaryActionsDispatcher = PlanetaryInterfaceTrait::new().dispatcher();
+            let address = get_caller_address();
+            let player = get!(world, (address, playlist), Status);
+
+            assert!(player.status == QueueStatus::Queued, error("Player is not in the queue"));
+
+            let mut queue = get!(world, playlist, Queue);
+            let mut index = get!(world, (playlist, player.index), QueueIndex);
+            let mut last_index = get!(world, (playlist, queue.length - 1), QueueIndex);
+
+            index.player = last_index.player;
+            index.index = last_index.index;
+            last_index.player = starknet::contract_address_const::<0x0>();
+
+            queue.length -= 1;
+            player.status = QueueStatus::None;
+
+            set!(world, (player, index, last_index, queue));
         }
+
+        fn refresh_status(world: @IWorldDispatcher) {
+            let address = get_caller_address();
+            let status = get!(world, address, Status);
+            assert!(status.status != QueueStatus::None, error("Player is not in the queue"));
+
+            let planetary: IPlanetaryActionsDispatcher = PlanetaryInterfaceTrait::new().dispatcher();
+            let contract_address = get_world_contract_address(planetary.get_world_address(status.game), selector_from_tag!("planetelo-planetelo"));
+            
+            let dispatcher = IOneOnOneDispatcher{ contract_address };
+        }
+
+
     }
 }
 

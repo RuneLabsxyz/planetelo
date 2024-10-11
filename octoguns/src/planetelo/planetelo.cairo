@@ -2,7 +2,7 @@ use planetary_interface::interfaces::octoguns::Settings;
 use octoguns::consts::GLOBAL_KEY;
 
 #[derive(Drop, Serde)]
-#[dojo::model(namespace: "octoguns_planetelo", nomapping: true)]
+#[dojo::model(namespace: "planetelo", nomapping: true)]
 struct Playlist {
     #[key]
     id: u32,
@@ -12,7 +12,7 @@ struct Playlist {
 
 
 #[derive(Copy, Drop, Serde)]
-#[dojo::model(namespace: "octoguns_planetelo", nomapping: true)]
+#[dojo::model(namespace: "planetelo", nomapping: true)]
 struct PlaylistGlobal {
     #[key]
     global_key: u32,
@@ -24,7 +24,7 @@ trait IPlanetelo {
     fn create_playlist(ref world: IWorldDispatcher, maps: Array<u32>, settings: Settings) -> u32;
 }
 
-#[dojo::contract]
+#[dojo::contract(namespace: "planetelo")]
 mod planetelo {
     use octoguns::consts::GLOBAL_KEY;
     use super::{Playlist, PlaylistGlobal, IPlanetelo};
