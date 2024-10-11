@@ -7,6 +7,8 @@ pub struct Elo {
     pub player: ContractAddress,
     #[key]
     pub game: felt252,
+    #[key]
+    pub playlist: u128,
     pub value: u64,
 }
 
@@ -17,8 +19,9 @@ pub struct Status {
     pub player: ContractAddress,
     #[key]
     pub game: felt252,
+    #[key]
+    pub playlist: u128,
     pub status: QueueStatus,
-    pub timestamp: u64,
     pub index: u32
 }
 
@@ -26,9 +29,9 @@ pub struct Status {
 #[dojo::model]
 pub struct Queue {
     #[key]
-    pub player: ContractAddress,
-    #[key]
     pub game: felt252,
+    #[key]
+    pub playlist: u128,
     pub length: u32
 }
 
@@ -39,7 +42,8 @@ pub struct QueueIndex {
     pub game: felt252,
     #[key]
     pub index: u32,
-    pub player: ContractAddress
+    pub player: ContractAddress,
+    pub timestamp: u64
 }
 
 #[derive(Copy, Drop, Serde, Introspect)]

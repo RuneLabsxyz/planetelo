@@ -10,7 +10,7 @@ trait IQueue {
 mod queue {
 
     use super::{IQueue};
-    use starknet::{ContractAddress, get_caller_address};
+    use starknet::{ContractAddress, get_caller_address, get_block_timestamp, contract_address_const};
     use planetary_interface::interfaces::planetary::{
         PlanetaryInterface, PlanetaryInterfaceTrait,
         IPlanetaryActionsDispatcher, IPlanetaryActionsDispatcherTrait,
@@ -28,20 +28,19 @@ mod queue {
     impl QueueImpl of IQueue<ContractState> {
         
 
-        fn queue(world: @IWorldDispatcher, playlist: felt252) {
+        fn queue(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let player = get!(world, (address, playlist), Status);
+            let player = get!(world, (address, game), Status);
 
             assert!(player.status == QueueStatus::None, error("Player is already in the queue"));
-
-            let elo = get!(world, (address, playlist), Elo);
 
             let mut queue = get!(world, playlist, Queue);
             
             let new = QueueIndex {
                 game: playlist,
                 index: queue.length,
-                player: address
+                player: address,
+                timestamp: get_block_timestamp()
             };
 
             queue.length += 1;
@@ -52,24 +51,25 @@ mod queue {
         }
 
 
-        fn dequeue(world: @IWorldDispatcher, playlist: felt252) {
+        fn dequeue(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let player = get!(world, (address, playlist), Status);
+            let player = get!(world, (address, game), Status);
 
             assert!(player.status == QueueStatus::Queued, error("Player is not in the queue"));
 
-            let mut queue = get!(world, playlist, Queue);
-            let mut index = get!(world, (playlist, player.index), QueueIndex);
-            let mut last_index = get!(world, (playlist, queue.length - 1), QueueIndex);
+            let mut queue = get!(world, (game, playlist), Queue);
+            let mut index = get!(world, (game, playlist, player.index), QueueIndex);
+            let mut last_index = get!(world, (game, playlist, queue.length - 1), QueueIndex);
 
             index.player = last_index.player;
             index.index = last_index.index;
-            last_index.player = starknet::contract_address_const::<0x0>();
+            index.timestamp = last_index.timestamp;
 
             queue.length -= 1;
             player.status = QueueStatus::None;
 
-            set!(world, (player, index, last_index, queue));
+            delete!(world, last_index);
+            set!(world, (player, index, queue));
         }
 
         fn refresh_status(world: @IWorldDispatcher) {
@@ -87,3 +87,4 @@ mod queue {
     }
 }
 
+``
