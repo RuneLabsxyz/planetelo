@@ -1,0 +1,1 @@
+const ELO_DIFF: u64 = 100;
