@@ -5,7 +5,7 @@ use octoguns::consts::GLOBAL_KEY;
 #[dojo::model(namespace: "planetelo", nomapping: true)]
 struct Playlist {
     #[key]
-    id: u32,
+    id: u128,
     maps: Array<u32>,
     settings: Settings
 }

@@ -1,8 +1,9 @@
 // define the interface
 #[dojo::interface]
 trait IQueue {
-    fn queue(world: @IWorldDispatcher, playlist: felt252);
-    fn dequeue(world: @IWorldDispatcher, playlist: felt252);
+    fn queue(world: @IWorldDispatcher, game: felt252, playlist: u128);
+    fn dequeue(world: @IWorldDispatcher, game: felt252, playlist: u128);
+    fn refresh(world: @IWorldDispatcher, game: felt252, playlist: u128);
 }
 
 // dojo decorator
@@ -72,10 +73,11 @@ mod queue {
             set!(world, (player, index, queue));
         }
 
-        fn refresh_status(world: @IWorldDispatcher) {
+        fn refresh(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let status = get!(world, address, Status);
+            let status = get!(world, (address, game, playlist), Status);
             assert!(status.status != QueueStatus::None, error("Player is not in the queue"));
+
 
             let planetary: IPlanetaryActionsDispatcher = PlanetaryInterfaceTrait::new().dispatcher();
             let contract_address = get_world_contract_address(planetary.get_world_address(status.game), selector_from_tag!("planetelo-planetelo"));
