@@ -14,7 +14,7 @@ pub struct Elo {
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
-pub struct Status {
+pub struct PlayerStatus {
     #[key]
     pub player: ContractAddress,
     #[key]
@@ -55,9 +55,8 @@ pub struct Game {
     #[key]
     pub game: felt252,
     #[key]
-    pub playlist: u128,
-    #[key]
     pub id: u128,
+    pub playlist: u128,
     pub player1: ContractAddress,
     pub player2: ContractAddress,
     pub timestamp: u64

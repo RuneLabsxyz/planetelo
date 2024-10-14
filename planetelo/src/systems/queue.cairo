@@ -4,6 +4,7 @@ trait IQueue {
     fn queue(world: @IWorldDispatcher, game: felt252, playlist: u128);
     fn dequeue(world: @IWorldDispatcher, game: felt252, playlist: u128);
     fn matchmake(world: @IWorldDispatcher, game: felt252, playlist: u128);
+    fn settle(world: @IWorldDispatcher, game: felt252, game_id: u128);
 }
 
 // dojo decorator
@@ -18,12 +19,13 @@ mod queue {
     };
 
     use planetary_interface::interfaces::one_on_one::{
-        IOneOnOneDispatcher, IOneOnOneDispatcherTrait,
+        IOneOnOneDispatcher, IOneOnOneDispatcherTrait, Status
     };
 
     use planetary_interface::utils::systems::{get_world_contract_address};
 
-    use planetelo::models::elo::{Status, QueueStatus, Elo, QueueIndex, Game, Queue};
+    use planetelo::models::{PlayerStatus, QueueStatus, Elo, QueueIndex, Game, Queue};
+    use planetelo::elo::EloTrait;
 
     use planetelo::consts::ELO_DIFF;
 
@@ -33,7 +35,7 @@ mod queue {
 
         fn queue(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let mut player = get!(world, (address, game), Status);
+            let mut player = get!(world, (address, game), PlayerStatus);
             let mut elo = get!(world, (address, game), Elo);
             if elo.value == 0 {
                 elo.value = 800;
@@ -63,7 +65,7 @@ mod queue {
 
         fn dequeue(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let mut player = get!(world, (address, game), Status);
+            let mut player = get!(world, (address, game), PlayerStatus);
 
             assert!(player.status == QueueStatus::Queued, "Player is not in the queue");
 
@@ -85,7 +87,7 @@ mod queue {
 
         fn matchmake(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let mut player_status = get!(world, (address, game, playlist), Status);
+            let mut player_status = get!(world, (address, game, playlist), PlayerStatus);
 
             assert!(player_status.status != QueueStatus::None, "Player is not in the queue");
             let timestamp = get_block_timestamp();
@@ -134,13 +136,13 @@ mod queue {
 
             player_status.status = QueueStatus::InGame(game_id);
 
-            let mut potential_status = get!(world, (potential_index.player, game, playlist), Status);
+            let mut potential_status = get!(world, (potential_index.player, game, playlist), PlayerStatus);
             potential_status.status = QueueStatus::InGame(game_id);
 
             let game = Game {
                 game: game,
-                playlist: playlist,
                 id: game_id,
+                playlist: playlist,
                 player1: player_index.player,
                 player2: potential_index.player,
                 timestamp: timestamp
@@ -216,6 +218,84 @@ mod queue {
 
             
 
+        }
+
+        fn settle(world: @IWorldDispatcher, game: felt252, game_id: u128) {
+
+            let mut game_model = get!(world, (game, game_id), Game);
+
+
+            let planetary: IPlanetaryActionsDispatcher = PlanetaryInterfaceTrait::new().dispatcher();
+            let contract_address = get_world_contract_address(IWorldDispatcher {contract_address: planetary.get_world_address(game)}, selector_from_tag!("planetelo-planetelo"));
+            
+            let dispatcher = IOneOnOneDispatcher{ contract_address };
+
+            let status = dispatcher.settle_match(game_id);
+            
+            let mut player_one = get!(world, (game_model.player1, game_model.game, game_model.playlist), PlayerStatus);
+            let mut player_two = get!(world, (game_model.player2, game_model.game, game_model.playlist), PlayerStatus);
+            let mut player_one_elo = get!(world, (game_model.player1, game_model.game, game_model.playlist), Elo);
+            let one_elo: u64 = player_one_elo.value;
+            let mut player_two_elo = get!(world, (game_model.player2, game_model.game, game_model.playlist), Elo);
+            let two_elo: u64 = player_two_elo.value;
+
+            let (mag, sign) = EloTrait::rating_change(800_u64, 800_u64, 50_u16, 20_u8);
+
+
+            match status {
+                Status::None => {
+                    panic!("Match has doesn't exist");
+                },
+                Status::Active => {
+                    panic!("Match is still active");
+                },
+                Status::Draw => {
+
+                    let (mag, sign) = EloTrait::rating_change(one_elo, two_elo, 50_u16, 20_u8);
+
+
+                    if sign {
+                        player_one_elo.value += mag;
+                        player_two_elo.value -= mag;
+                    }
+                    else {
+                        player_one_elo.value -= mag;
+                        player_two_elo.value += mag;
+                    }
+                    
+
+                    player_one.status = QueueStatus::None;
+                    player_two.status = QueueStatus::None;
+
+                    set!(world, (player_one, player_two, player_one_elo, player_two_elo));
+                },
+                Status::Winner(winner) => {
+
+                    let mut did_win: u16 = 0;
+
+                    if winner == game_model.player1 {
+                        did_win = 100;
+                    }
+
+                    let (mag, sign) = EloTrait::rating_change(one_elo, two_elo, did_win, 20_u8);
+
+                    if sign {
+                        player_one_elo.value += mag;
+                        player_two_elo.value -= mag;
+                    }
+                    else {
+                        player_one_elo.value -= mag;
+                        player_two_elo.value += mag;
+                    }
+                    
+                    player_one.status = QueueStatus::None;
+                    player_two.status = QueueStatus::None;
+
+                    set!(world, (player_one, player_two, player_one_elo, player_two_elo));
+                }
+            }
+            
+            
         }
 
 
