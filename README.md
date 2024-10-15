@@ -4,7 +4,7 @@ Planetelo is a generalized elo matchmaking system that leverages planetary, by @
 ![diagram](images/planetelo.png)
 
 ## How
-There are 4 main components in this system, being Planetelo, Planetary, the game it's being implemented for, and the game's planetelo implementation. The planetelo implementation is defined in the planetelo namespace in your game's world, and expects a planetelo contract in that namespace that implements the interface that enables planetelo to create games and get the results. 
+There are 4 main components in this system, being Planetelo, Planetary, the game it's being implemented for, and the game's planetelo implementation. The planetelo implementation is defined in the planetelo namespace in your game's world as a contract that implements the interface that enables planetelo to create games and get the results. 
 
 # Why
 This design has 2 main benefits.
