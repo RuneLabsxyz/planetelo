@@ -1,5 +1,5 @@
 # Overview
-Planetelo is a generalized elo matchmaking system that leverages planetary, by @mataleone @itrainspiders. Any 1v1 dojo game can easily become compatible by simply implementing interface that tells planetelo how to create and settle a game, and then registering the world with planetary. In planetelo you can then attempt to queue any game registered with planetary, where it will attempt to create a dispatcher for the interface, and if successful the player will enter the queue and be matched based on their elo.
+Planetelo is a generalized elo matchmaking system that leverages planetary, by @mataleone @itrainspiders. Any 1v1 dojo game can easily become compatible by simply implementing the interface that tells planetelo how to create and settle a game, and then registering the world with planetary. In planetelo you can then attempt to queue any game registered with planetary, where it will attempt to create a dispatcher for the interface, and if successful the player will enter the queue and be matched based on their elo.
 
 ![diagram](images/Planetelo.png)
 
