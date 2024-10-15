@@ -1,23 +1,58 @@
 <script lang="ts">
+    import type { Entity } from "@dojoengine/recs";
+    import { componentValueStore, type ComponentStore } from "./dojo/componentValueStore";
+    import { dojoStore, accountStore, burnerStore } from "./stores";
+    import { Account } from "starknet";
+    import { type Burner } from "@dojoengine/create-burner";
+    import { handleBurnerChange, handleNewBurner, handleClearBurners } from "./handlers";
 
-import { type SDK, createDojoStore } from "@dojoengine/sdk";
+    let entityId: Entity;
+    let account: Account;
+    let queues: ComponentStore;
+    let burners: Burner[]
+    
+    $: ({ clientComponents, torii, toriiClient, burnerManager, client } = $dojoStore);
+    $: if ($accountStore) account = $accountStore; 
 
-import { type Models, type Schema } from "./bindings.ts";
-import { useSystemCalls } from "./useSystemCalls.ts";
+    $: if (torii && account) entityId = torii.poseidonHash([account.address])
 
-export let sdk: SDK<Schema>;
+    $: if (dojoStore) queues = componentValueStore(clientComponents.Queue, entityId);
+    $: if ($burnerStore) burners = $burnerStore
 
-const useDojoStore = createDojoStore<Schema>();
+    let entities = toriiClient.getAllEntities(1000, 0);
 
-//const {  } = useSystemCalls();
-
+    console.log(entities);
 
 </script>
 
-<div class="bg-black min-h-screen w-full p-4 sm:p-8">
-    <div class="max-w-7xl mx-auto">
+<main>
+    {#if $dojoStore}
+        <p>Setup completed</p>
+    {:else}
+        <p>Setting up...</p>
+    {/if}
 
+    <button on:click={handleNewBurner}>
+        {burnerManager?.isDeploying ? "deploying burner" : "create burner"}
+    </button>
 
-               
+    <div class="card">
+        <div>{`burners deployed: ${burners.length}`}</div>
+        <div>
+            select signer:{" "}
+            <select on:change={handleBurnerChange}>
+                {#each burners as burner}
+                        <option value={burner.address}>
+                            {burner.address}
+                        </option>
+                {/each}
+            </select>
+        </div>
+        <div>
+            <button on:click={handleClearBurners}>
+                Clear burners
+            </button>
+        </div>
     </div>
-</div>
+      
+</main>
