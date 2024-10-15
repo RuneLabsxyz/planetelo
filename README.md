@@ -1,7 +1,7 @@
 # Overview
 Planetelo is a generalized elo matchmaking system that leverages planetary, by @mataleone @itrainspiders. Any 1v1 dojo game can easily become compatible by simply implementing interface that tells planetelo how to create and settle a game, and then registering the world with planetary. In planetelo you can then attempt to queue any game registered with planetary, where it will attempt to create a dispatcher for the interface, and if successful the player will enter the queue and be matched based on their elo.
 
-![](images/planetelo.png)
+![diagram](images/planetelo.png)
 
 ## How
 There are 4 main components in this system, being Planetelo, Planetary, the game it's being implemented for, and the game's planetelo implementation. The planetelo implementation is defined in the planetelo namespace in your game's world, and expects a planetelo contract in that namespace that implements the interface that enables planetelo to create games and get the results. 
@@ -33,14 +33,14 @@ mod planetelo {
 and then make sure that your world is registered with planetary, which you can do on init like this 
 ```
 use planetary_interface::interfaces::planetary::{
-PlanetaryInterface, PlanetaryInterfaceTrait,
+  PlanetaryInterface, PlanetaryInterfaceTrait,
 };
 
 fn dojo_init(ref world: IWorldDispatcher) {
 
-let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
+  let planetary: PlanetaryInterface = PlanetaryInterfaceTrait::new();
 
-planetary.dispatcher().register(NAMESPACE, world.contract_address);
+  planetary.dispatcher().register(NAMESPACE, world.contract_address);
 
 }
 ```
