@@ -1,17 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import App from "./App.tsx";
+import App from "./App.svelte";
 
 import "./index.css";
 import { init } from "@dojoengine/sdk";
-import { Schema, schema } from "./bindings.ts";
+import { type Schema, schema } from "./bindings.ts";
 import { dojoConfig } from "../dojoConfig.ts";
-import { DojoContextProvider } from "./DojoContext.tsx";
 import { setupBurnerManager } from "@dojoengine/create-burner";
 
-async function main() {
-    const sdk = await init<Schema>(
+    
+
+async function initApp() {
+  // Update the store with the setup result
+  const sdk = await init<Schema>(
         {
             client: {
                 rpcUrl: dojoConfig.rpcUrl,
@@ -27,19 +29,20 @@ async function main() {
             },
         },
         schema
-    );
+  );
 
-    createRoot(document.getElementById("root")!).render(
-        <StrictMode>
-            <DojoContextProvider
-                burnerManager={await setupBurnerManager(dojoConfig)}
-            >
-                <App sdk={sdk} />
-            </DojoContextProvider>
-        </StrictMode>
-    );
+  const burnerManager = await setupBurnerManager(dojoConfig);
+
+  console.log("App initialized");
+
+  const app = new App({
+    target: document.getElementById("app")!,
+    props: {
+        sdk: sdk,
+    },
+  });
+
+  return app;
 }
 
-main().catch((error) => {
-    console.error("Failed to initialize the application:", error);
-});
+export default initApp();

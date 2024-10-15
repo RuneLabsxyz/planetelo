@@ -1,6 +1,17 @@
 import { writable, get } from 'svelte/store';
 import type { Readable } from 'svelte/store';
-import { ParsedEntity, SchemaType } from '@dojoengine/sdk';
+import type { ParsedEntity, SchemaType } from '@dojoengine/sdk';
+
+export const setupStore = writable<any>({
+  client: null,
+  account: null,
+});
+
+export const burnerManagerStore = writable<any>({
+  burnerManager: null,
+});
+
+export const dojoStore = writable<GameStore<SchemaType>>();
 
 /**
  * Represents a pending transaction for optimistic updates.
