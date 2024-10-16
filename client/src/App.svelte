@@ -9,7 +9,8 @@
     let entityId: Entity;
     let account: Account;
     let queues: ComponentStore;
-    let burners: Burner[]
+    let burners: Burner[];
+    let entities: any;
     
     $: ({ clientComponents, torii, toriiClient, burnerManager, client } = $dojoStore);
     $: if ($accountStore) account = $accountStore; 
@@ -19,7 +20,7 @@
     $: if (dojoStore) queues = componentValueStore(clientComponents.Queue, entityId);
     $: if ($burnerStore) burners = $burnerStore
 
-    let entities = toriiClient.getAllEntities(1000, 0);
+    if (toriiClient) entities = toriiClient.getAllEntities(1000, 0);
 
     console.log(entities);
 

@@ -24,7 +24,7 @@ trait IPlanetelo {
     fn create_playlist(ref world: IWorldDispatcher, maps: Array<u32>, settings: Settings) -> u32;
 }
 
-#[dojo::contract(namespace: "planetelo")]
+#[dojo::contract(namespace: "planetelo", nomapping: true)]
 mod planetelo {
     use octoguns::consts::GLOBAL_KEY;
     use super::{Playlist, PlaylistGlobal, IPlanetelo};
@@ -45,7 +45,7 @@ mod planetelo {
             global.playlist_count += 1;
 
             let playlist = Playlist {
-                id,
+                id: id.into(),
                 maps,
                 settings
             };
