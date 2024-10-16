@@ -1,6 +1,6 @@
-tag = "octoguns-planetelo"
+tag = "planetelo-planetelo"
 writes = [
-    "octoguns_planetelo-Playlist",
-    "octoguns_planetelo-PlaylistMeta",
+    "planetelo-Playlist",
+    "planetelo-PlaylistGlobal",
 
 ]

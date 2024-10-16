@@ -14,7 +14,7 @@ pub struct Elo {
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
-pub struct Status {
+pub struct PlayerStatus {
     #[key]
     pub player: ContractAddress,
     #[key]
@@ -41,14 +41,30 @@ pub struct QueueIndex {
     #[key]
     pub game: felt252,
     #[key]
+    pub playlist: u128,
+    #[key]
     pub index: u32,
     pub player: ContractAddress,
+    pub timestamp: u64,
+    pub elo: u64
+}
+
+#[derive(Copy, Drop, Serde)]
+#[dojo::model]
+pub struct Game {
+    #[key]
+    pub game: felt252,
+    #[key]
+    pub id: u128,
+    pub playlist: u128,
+    pub player1: ContractAddress,
+    pub player2: ContractAddress,
     pub timestamp: u64
 }
 
-#[derive(Copy, Drop, Serde, Introspect)]
+#[derive(Copy, Drop, Serde, Introspect, PartialEq)]
 pub enum QueueStatus {
     None,
     Queued,
-    InGame: u32
+    InGame: u128
 }      
