@@ -25,7 +25,7 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
   const contractComponents = defineContractComponents(world);
 
   // create client components
-  const clientComponents = createPlaneteloClientComponents({ contractComponents });
+  const planeteloComponents = createPlaneteloClientComponents({ contractComponents });
 
   // create dojo provider
   const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
@@ -72,7 +72,7 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
 
   return {
     client,
-    clientComponents,
+    planeteloComponents,
     contractComponents,
     publish: (typedData: string, signature: ArraySignatureType) => {
       toriiClient.publishMessage(typedData, signature);

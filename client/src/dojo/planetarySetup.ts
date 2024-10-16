@@ -22,10 +22,11 @@ export async function planetarySetup({ ...config }: DojoConfig) {
   const contractComponents = defineContractComponents(world);
 
   // create client components
-  const clientComponents = createPlanetaryClientComponents({ contractComponents });
+  const planetaryComponents = createPlanetaryClientComponents({ contractComponents });
 
   // create dojo provider
   const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
+  const planets = toriiClient.getAllEntities(1000, 0);
 
   const sync = await getSyncEntities(
     toriiClient,
@@ -46,7 +47,7 @@ export async function planetarySetup({ ...config }: DojoConfig) {
 
   return {
     client,
-    clientComponents,
+    planetaryComponents,
     contractComponents,
     config,
     dojoProvider,
@@ -54,5 +55,6 @@ export async function planetarySetup({ ...config }: DojoConfig) {
     eventSync,
     torii,
     sync,
+    planets
   };
 }

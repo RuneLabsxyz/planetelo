@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Entity } from "@dojoengine/recs";
     import { componentValueStore, type ComponentStore } from "./dojo/componentValueStore";
-    import { planeteloStore, accountStore, burnerStore } from "./stores";
+    import { planeteloStore, planetaryStore, accountStore, burnerStore } from "./stores";
     import { Account } from "starknet";
     import { type Burner } from "@dojoengine/create-burner";
     import { handleBurnerChange, handleNewBurner, handleClearBurners } from "./handlers";
@@ -12,12 +12,15 @@
     let burners: Burner[];
     let entities: any;
     
-    $: ({ clientComponents, torii, toriiClient, burnerManager, client } = $planeteloStore);
+    $: ({ planeteloComponents, torii, toriiClient, burnerManager, client } = $planeteloStore);
+    $: ({ planets, planetaryComponents } = $planetaryStore);
     $: if ($accountStore) account = $accountStore; 
+
+    console.log(planets);
 
     $: if (torii && account) entityId = torii.poseidonHash([account.address])
 
-    $: if (planeteloStore) queues = componentValueStore(clientComponents.Queue, entityId);
+    $: if (planeteloStore) queues = componentValueStore(planeteloComponents.Queue, entityId);
     $: if ($burnerStore) burners = $burnerStore
 
     if (toriiClient) entities = toriiClient.getAllEntities(1000, 0);
