@@ -1,18 +1,18 @@
 import type { DojoConfig } from "@dojoengine/core";
 import { DojoProvider } from "@dojoengine/core";
 import * as torii from "@dojoengine/torii-client";
-import { createClientComponents } from "./createClientComponents";
-import { defineContractComponents } from "./typescript/models.gen";
+import { createPlaneteloClientComponents } from "./createPlaneteloClientComponents";
+import { defineContractComponents } from "./bindings/planetelo/models.gen";
 import { world } from "./world";
-import { setupWorld } from "./typescript/contracts.gen";
+import { setupWorld } from "./bindings/planetelo/contracts.gen";
 import { Account } from "starknet";
 import type { ArraySignatureType } from "starknet";
 import { BurnerManager } from "@dojoengine/create-burner";
 import { getSyncEntities, getSyncEvents } from "@dojoengine/state";
 
-export type SetupResult = Awaited<ReturnType<typeof setup>>;
+export type SetupResult = Awaited<ReturnType<typeof planeteloSetup>>;
 
-export async function setup({ ...config }: DojoConfig) {
+export async function planeteloSetup({ ...config }: DojoConfig) {
   // torii client
   const toriiClient = await torii.createClient({
     rpcUrl: config.rpcUrl,
@@ -25,7 +25,7 @@ export async function setup({ ...config }: DojoConfig) {
   const contractComponents = defineContractComponents(world);
 
   // create client components
-  const clientComponents = createClientComponents({ contractComponents });
+  const clientComponents = createPlaneteloClientComponents({ contractComponents });
 
   // create dojo provider
   const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
