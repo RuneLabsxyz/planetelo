@@ -12,8 +12,8 @@ export type SetupResult = Awaited<ReturnType<typeof planetarySetup>>;
 export async function planetarySetup({ ...config }: DojoConfig) {
   // torii client
   const toriiClient = await torii.createClient({
-    rpcUrl: config.rpcUrl,
-    toriiUrl: config.toriiUrl,
+    rpcUrl: 'https://api.cartridge.gg/x/planetelo/katana',
+    toriiUrl: 'https://api.cartridge.gg/x/planetelo-planetary/torii',
     relayUrl: "",
     worldAddress: config.manifest.world.address || "",
   });
