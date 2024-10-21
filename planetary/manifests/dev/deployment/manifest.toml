@@ -4,14 +4,14 @@ class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
 original_class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
 abi = "manifests/dev/deployment/abis/dojo-world.json"
 address = "0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369"
-transaction_hash = "0x5227d3d2065742525f03c721ed879054d5519d5bdc5dc6617123cc67f2e29bd"
-block_number = 3
+transaction_hash = "0x60c93001dd44c56fd0a88cc2a27998fabf4c510b8816fa74b8397ae8f9236b"
+block_number = 17
 seed = "planetary"
 manifest_name = "dojo-world"
 
 [world.metadata]
 profile_name = "dev"
-rpc_url = "http://localhost:5050/"
+rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
 
 [base]
 kind = "Class"

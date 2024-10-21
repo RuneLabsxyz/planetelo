@@ -1,9 +1,9 @@
 import { overridableComponent } from "@dojoengine/recs";
-import type { ContractComponents } from "./typescript/models.gen";
+import type { ContractComponents } from "./bindings/planetelo/models.gen";
 
-export type ClientComponents = ReturnType<typeof createClientComponents>;
+export type PlaneteloClientComponents = ReturnType<typeof createPlaneteloClientComponents>;
 
-export function createClientComponents({
+export function createPlaneteloClientComponents({
   contractComponents,
 }: {
   contractComponents: ContractComponents;

@@ -1,6 +1,6 @@
 use starknet::ContractAddress;
 #[derive(Drop, Serde)]
-#[dojo::model(namespace: "pistols64_planetelo", nomapping: true)]
+#[dojo::model(namespace: "planetelo", nomapping: true)]
 struct Player {
     #[key]
     address: ContractAddress,
@@ -12,7 +12,7 @@ trait IPlanetelo {
     fn register_player(ref world: IWorldDispatcher, name: felt252);
 }
 
-#[dojo::contract(namespace = "pistols64_planetelo")]
+#[dojo::contract(namespace = "planetelo")]
 mod planetelo {
     use super::{Player, IPlanetelo};
     use planetary_interface::interfaces::one_on_one::{IOneOnOne, Status};

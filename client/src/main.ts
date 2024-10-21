@@ -1,15 +1,20 @@
 import "./app.css";
 import App from "./App.svelte";
-import { setup } from "./dojo/setup";
-import { dojoConfig } from "../dojoConfig";
-import { accountStore, burnerStore, dojoStore } from "./stores";
+import { planeteloSetup } from "./dojo/planeteloSetup";
+import { planetarySetup } from "./dojo/planetarySetup";
+import { dojoConfig as planetaryConfig } from "../planetaryConfig";
+import { dojoConfig as planeteloConfig } from "../planeteloConfig";
+
+import { accountStore, burnerStore, planeteloStore, planetaryStore } from "./stores";
 
 // Create a writable store for the setup result
 
 async function initApp() {
   // Update the store with the setup result
-  let setupRes = await setup(dojoConfig)
-  dojoStore.set(setupRes);
+  let setupRes = await planeteloSetup(planeteloConfig);
+  let planetarySetupRes = await planetarySetup(planetaryConfig);
+  planeteloStore.set(setupRes);
+  planetaryStore.set(planetarySetupRes);
   burnerStore.set(setupRes.burnerManager.list());
   accountStore.set(setupRes.burnerManager.getActiveAccount())
 

@@ -16,8 +16,8 @@ telegram = "https://t.me/dojoengine"
 default = "planetelo"
 
 [env]
-rpc_url = "http://localhost:5050/"
+rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
 # Default account for katana with seed = 0
-account_address = "0xb3ff441a68610b30fd5e2abbf3a1548eb6ba6f3559f2862bf2dc757e5828ca"
-private_key = "0x2bbf4f9fd0bbb2e60b0316c1fe0b76cf7a4d0198bd493ced9b8df2a3a24d68a"
-#world_address = "0x795930dddc8ceb4061ea4ec7c7ae5e0738c51ed584b4515dc1fb952bccd027a"
+account_address = "0xf0b5a89dc3a54eedb7d35d5e6c0728aab458de4dcab9f1b99e23ec49611b0f"
+private_key = "0x3aafe890b62552023ee5919b6051fb975b13f2458c77eea9aecf25ee4273b81"
+world_address = "0x55b4d98ac0e7cb9775a5761349e08e2bd94befe3921b0e7656be55701b2e243"
