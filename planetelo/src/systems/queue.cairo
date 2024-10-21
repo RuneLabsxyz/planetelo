@@ -35,8 +35,8 @@ mod queue {
 
         fn queue(world: @IWorldDispatcher, game: felt252, playlist: u128) {
             let address = get_caller_address();
-            let mut player = get!(world, (address, game), PlayerStatus);
-            let mut elo = get!(world, (address, game), Elo);
+            let mut player = get!(world, (address, game, playlist), PlayerStatus);
+            let mut elo = get!(world, (address, game, playlist), Elo);
             if elo.value == 0 {
                 elo.value = 800;
                 set!(world, (elo));
@@ -44,7 +44,7 @@ mod queue {
 
             assert!(player.status == QueueStatus::None, "Player is already in the queue");
 
-            let mut queue = get!(world, playlist, Queue);
+            let mut queue = get!(world, (game, playlist), Queue);
             
             let new = QueueIndex {
                 game: game,

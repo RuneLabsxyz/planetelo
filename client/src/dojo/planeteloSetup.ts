@@ -28,7 +28,7 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
   const planeteloComponents = createPlaneteloClientComponents({ contractComponents });
 
   // create dojo provider
-  const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
+  const dojoProvider = new DojoProvider(config.manifest, 'https://api.cartridge.gg/x/planetelo/katana');
 
   const sync = await getSyncEntities(
     toriiClient,
@@ -51,7 +51,7 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
   const burnerManager = new BurnerManager({
     masterAccount: new Account(
       {
-        nodeUrl: config.rpcUrl,
+        nodeUrl: 'https://api.cartridge.gg/x/planetelo/katana',
       },
       config.masterAddress,
       config.masterPrivateKey

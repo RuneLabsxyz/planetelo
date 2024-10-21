@@ -18,6 +18,6 @@ default = "planetary"
 
 [env]
 rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
-account_address = "0x5f6c472d7bc050726bc0825923d7f144f55d110e972e11df2376564603be4aa"
-private_key = "0x5ea11766080cde4326db7d3c501385c9ae6f6e6262aa7fd10986a9936739c69"
+account_address = "0xf0b5a89dc3a54eedb7d35d5e6c0728aab458de4dcab9f1b99e23ec49611b0f"
+private_key = "0x3aafe890b62552023ee5919b6051fb975b13f2458c77eea9aecf25ee4273b81"
 #world_address = "0x9d6ed4ec2eb3d8b4d4f41973aae1a7c908f83fd28a30e77ca94adf90d8b33d"

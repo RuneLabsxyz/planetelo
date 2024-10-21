@@ -11,7 +11,7 @@ export type SetupResult = Awaited<ReturnType<typeof planetarySetup>>;
 
 export async function planetarySetup({ ...config }: DojoConfig) {
   // torii client
-  const toriiClient = await torii.createClient({
+  const planetaryTorii = await torii.createClient({
     rpcUrl: 'https://api.cartridge.gg/x/planetelo/katana',
     toriiUrl: 'https://api.cartridge.gg/x/planetelo-planetary/torii',
     relayUrl: "",
@@ -25,18 +25,19 @@ export async function planetarySetup({ ...config }: DojoConfig) {
   const planetaryComponents = createPlanetaryClientComponents({ contractComponents });
 
   // create dojo provider
-  const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
-  const planets = toriiClient.getAllEntities(1000, 0);
+  const dojoProvider = new DojoProvider(config.manifest, 'https://api.cartridge.gg/x/planetelo/katana');
+  const planets = await planetaryTorii.getAllEntities(1000, 0);
+  console.log(planets);
 
   const sync = await getSyncEntities(
-    toriiClient,
+    planetaryTorii,
     contractComponents as any,
     undefined,
     []
   );
 
   const eventSync = getSyncEvents(
-    toriiClient,
+    planetaryTorii,
     contractComponents as any,
     undefined,
     []
@@ -51,7 +52,7 @@ export async function planetarySetup({ ...config }: DojoConfig) {
     contractComponents,
     config,
     dojoProvider,
-    toriiClient,
+    planetaryTorii,
     eventSync,
     torii,
     sync,
