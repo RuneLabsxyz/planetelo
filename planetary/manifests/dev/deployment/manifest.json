@@ -1235,8 +1235,8 @@
       }
     ],
     "address": "0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369",
-    "transaction_hash": "0x60c93001dd44c56fd0a88cc2a27998fabf4c510b8816fa74b8397ae8f9236b",
-    "block_number": 17,
+    "transaction_hash": "0x495ddfb763513fd33c0a8530c5d01bda61f61ee93688b84f903e004fddacdcc",
+    "block_number": 12,
     "seed": "planetary",
     "metadata": {
       "profile_name": "dev",

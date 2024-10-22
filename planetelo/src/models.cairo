@@ -14,6 +14,15 @@ pub struct Elo {
 
 #[derive(Copy, Drop, Serde)]
 #[dojo::model]
+pub struct Player {
+    #[key]
+    pub player: ContractAddress,
+    pub games_played: u32,
+    pub queues_joined: u32
+}
+
+#[derive(Copy, Drop, Serde)]
+#[dojo::model]
 pub struct PlayerStatus {
     #[key]
     pub player: ContractAddress,

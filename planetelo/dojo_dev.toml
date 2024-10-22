@@ -18,6 +18,6 @@ default = "planetelo"
 [env]
 rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
 # Default account for katana with seed = 0
-account_address = "0xf0b5a89dc3a54eedb7d35d5e6c0728aab458de4dcab9f1b99e23ec49611b0f"
-private_key = "0x3aafe890b62552023ee5919b6051fb975b13f2458c77eea9aecf25ee4273b81"
+account_address = "0x48ac21dfc22fdf68b1537ed29f299c3be61ecd50dfb04e76b369752ee44aaa2"
+private_key = "0xbd581fa0850426f9bab60dfdb3621be24f512f6d9afe7413b9311f990e3697"
 world_address = "0x55b4d98ac0e7cb9775a5761349e08e2bd94befe3921b0e7656be55701b2e243"

@@ -11,5 +11,10 @@ export function createPlaneteloClientComponents({
   return {
     ...contractComponents,
     Queue: overridableComponent(contractComponents.Queue),
+    Player: overridableComponent(contractComponents.Player),
+    PlayerStatus: overridableComponent(contractComponents.PlayerStatus),
+    QueueIndex: overridableComponent(contractComponents.QueueIndex),
+    Game: overridableComponent(contractComponents.Game),
+    Elo: overridableComponent(contractComponents.Elo),
   };
 }

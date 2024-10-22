@@ -24,7 +24,7 @@ mod queue {
 
     use planetary_interface::utils::systems::{get_world_contract_address};
 
-    use planetelo::models::{PlayerStatus, QueueStatus, Elo, QueueIndex, Game, Queue};
+    use planetelo::models::{PlayerStatus, QueueStatus, Elo, QueueIndex, Game, Queue, Player};
     use planetelo::elo::EloTrait;
 
     use planetelo::consts::ELO_DIFF;
@@ -37,12 +37,14 @@ mod queue {
             let address = get_caller_address();
             let mut player = get!(world, (address, game, playlist), PlayerStatus);
             let mut elo = get!(world, (address, game, playlist), Elo);
+            let mut player_model = get!(world, (address), Player);
             if elo.value == 0 {
                 elo.value = 800;
                 set!(world, (elo));
             }
 
             assert!(player.status == QueueStatus::None, "Player is already in the queue");
+            player_model.queues_joined += 1;
 
             let mut queue = get!(world, (game, playlist), Queue);
             
@@ -58,7 +60,7 @@ mod queue {
             queue.length += 1;
             player.status = QueueStatus::Queued;
 
-            set!(world, (player, new, queue));
+            set!(world, (player, new, queue, player_model));
             
         }
 
@@ -94,7 +96,8 @@ mod queue {
 
             let mut player_index = get!(world, (game, playlist, player_status.index), QueueIndex);
             let time_diff = timestamp - player_index.timestamp;
-            let time_diff_secs = time_diff / 1000;
+            let time_diff_secs = time_diff;
+            println!("time_diff_secs: {}", time_diff_secs);
             assert!(time_diff_secs > 30, "Must be in queue for at least 30 seconds to refresh");
 
             let queue = get!(world, (game, playlist), Queue);

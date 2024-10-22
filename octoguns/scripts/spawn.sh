@@ -8,3 +8,5 @@ export WORLD_ADDRESS=$(cat ./manifests/dev/deployment/manifest.json | jq -r '.wo
 
 # sozo execute --world <WORLD_ADDRESS> <CONTRACT> <ENTRYPOINT>
 sozo execute mapmaker default_map --world $WORLD_ADDRESS 
+sozo execute planetelo create_playlist --world $WORLD_ADDRESS -c 1,0,300,3,1,100,400
+
