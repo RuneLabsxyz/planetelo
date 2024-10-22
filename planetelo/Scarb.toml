@@ -10,7 +10,7 @@ sierra-replace-ids = true
 migrate = "sozo build && sozo migrate apply"
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.17" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.16" }
 planetary_interface = { path = "../planetary_interface" }
 
 [[target.dojo]]

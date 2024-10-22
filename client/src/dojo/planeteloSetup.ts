@@ -53,8 +53,8 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
       {
         nodeUrl: 'https://api.cartridge.gg/x/planetelo/katana',
       },
-      '0x48ac21dfc22fdf68b1537ed29f299c3be61ecd50dfb04e76b369752ee44aaa2',
-      '0xbd581fa0850426f9bab60dfdb3621be24f512f6d9afe7413b9311f990e3697'
+      '0x955b7ec33a80e83bf1a2f1b2569b1aa6fccbb49480ff924d4c88b239d69da9',
+      '0x145ce5d0c6512ace2e6480a05e8c4617bcc0ef432f12bf2fe33b3e1483e788d'
     ),
     accountClassHash: config.accountClassHash,
     rpcProvider: dojoProvider.provider,

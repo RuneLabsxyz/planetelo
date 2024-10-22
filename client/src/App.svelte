@@ -25,12 +25,12 @@
 
     if ($accountStore) console.log(account!.address);
 
-    if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x76756c63616e']));
+    if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x6f63746f67756e73']));
 
-    if (torii && $accountStore) queueId = torii.poseidonHash(['0x76756c63616e', '0x0'])
+    if (torii && $accountStore) queueId = torii.poseidonHash(['0x6f63746f67756e73', '0x0'])
     if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.address)]);
 
-    if (torii && account!) playerId = torii.poseidonHash([account.address, '0x76756c63616e', '0x0'])
+    if (torii && account!) playerId = torii.poseidonHash([account.address, '0x6f63746f67756e73', '0x0'])
 
     if (planeteloComponents)console.log(getComponentValue(planeteloComponents.Player, addressId));
 
@@ -82,9 +82,9 @@
 
     <div class="queue">
         <div class="queue-item">
-            <button on:click={() => client.queue.queue({account, game: BigInt('0x76756c63616e'), playlist: BigInt(0)})}>Queue</button>
-            <button on:click={() => client.queue.dequeue({account, game: BigInt('0x76756c63616e'), playlist: BigInt(0)})}>Dequeue</button>
-            <button on:click={() => client.queue.matchmake({account, game: BigInt('0x76756c63616e'), playlist: BigInt(0)})}>Refresh</button>
+            <button on:click={() => client.queue.queue({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Queue</button>
+            <button on:click={() => client.queue.dequeue({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Dequeue</button>
+            <button on:click={() => client.queue.matchmake({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Refresh</button>
 
         </div>
 </div>

@@ -101,6 +101,7 @@ mod queue {
             assert!(time_diff_secs > 30, "Must be in queue for at least 30 seconds to refresh");
 
             let queue = get!(world, (game, playlist), Queue);
+            assert!(queue.length > 1, "There must be at least 2 players in the queue to matchmake");
             let mut potential_index = player_index;
             let mut i = 0;
             let mut found = false;
@@ -111,6 +112,10 @@ mod queue {
                         i+=1;
                         continue;
                     }
+                    else if potential_index.player == player_index.player {
+                        i+=1;
+                        continue;
+                    }
                     else {
                         found = true;
                         break;
@@ -118,6 +123,10 @@ mod queue {
                 } 
                 else {
                     if player_index.elo - potential_index.elo > ELO_DIFF {
+                        i+=1;
+                        continue;
+                    }
+                    else if potential_index.player == player_index.player {
                         i+=1;
                         continue;
                     }
@@ -142,7 +151,7 @@ mod queue {
             let mut potential_status = get!(world, (potential_index.player, game, playlist), PlayerStatus);
             potential_status.status = QueueStatus::InGame(game_id);
 
-            let game = Game {
+            let game_model = Game {
                 game: game,
                 id: game_id,
                 playlist: playlist,
@@ -151,9 +160,13 @@ mod queue {
                 timestamp: timestamp
             };
 
-            let mut last_player = get!(world, (game, playlist, queue.length - 1), QueueIndex);
-            let mut second_last_player = get!(world, (game, playlist, queue.length - 2), QueueIndex);
-            let mut replacing = QueueIndex { player: contract_address_const::<0x0>(), elo: 0, timestamp: 0, index: 0, game: 0, playlist: 0 };
+            let last_index = queue.length - 1;
+            let second_last_index = queue.length -2;
+
+            let mut last_player = get!(world, (game, playlist, last_index), QueueIndex);
+            let mut second_last_player = get!(world, (game, playlist, second_last_index), QueueIndex);
+
+            let mut replacing = QueueIndex { game, playlist, index: 0, player: contract_address_const::<0x0>(), elo: 0, timestamp: 0 };
 
             //if both are not in the last two positions, move last 2 positions to their spots and delelete the last 2 positions
             if player_index.index < queue.length - 2 && potential_index.index < queue.length - 2 {
@@ -217,7 +230,7 @@ mod queue {
 
 
             
-            set!(world, (player_status, potential_status, game));
+            set!(world, (player_status, potential_status, game_model));
 
             
 

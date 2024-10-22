@@ -4,8 +4,8 @@ class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
 original_class_hash = "0x6f38d5d9507c5d9546290e1a27e309efe5a9af3770b6cc1627db4a1b90a7dce"
 abi = "manifests/dev/deployment/abis/dojo-world.json"
 address = "0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369"
-transaction_hash = "0x495ddfb763513fd33c0a8530c5d01bda61f61ee93688b84f903e004fddacdcc"
-block_number = 12
+transaction_hash = "0x54b04ed505c944d4917d25b826f81c3e600175fcbeb59aac3aef3f11c98306c"
+block_number = 5
 seed = "planetary"
 manifest_name = "dojo-world"
 
