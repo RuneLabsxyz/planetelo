@@ -3,12 +3,19 @@
     import { componentValueStore, type ComponentStore } from "./dojo/componentValueStore";
     import { planeteloStore, planetaryStore, accountStore, burnerStore } from "./stores";
     import { Account } from "starknet";
-    import { type Burner } from "@dojoengine/create-burner";
+    import type { Burner } from "@dojoengine/create-burner";
     import { handleBurnerChange, handleNewBurner, handleClearBurners } from "./handlers";
+    import { getEntityIdFromKeys } from "@dojoengine/utils";
+    import { getComponentValue } from "@dojoengine/recs";
 
-    let entityId: Entity;
+    let queueId: Entity;
+    let addressId: Entity;
+    let playerId: Entity; 
     let account: Account;
     let queue: ComponentStore;
+    let status: ComponentStore;
+    let game_planet: ComponentStore;
+    let player: ComponentStore;
     let burners: Burner[];
     let entities: any;
     
@@ -16,17 +23,30 @@
     $: ({ planets, planetaryComponents, planetaryTorii } = $planetaryStore);
     if ($accountStore) account = $accountStore; 
 
-    console.log(planets);
+    if ($accountStore) console.log(account!.address);
 
-    if (torii && $accountStore) entityId = torii.poseidonHash(['0x76756c63616e', '0'])
+    if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x6f63746f67756e73']));
 
-    $: if (planeteloStore) queue = componentValueStore(planeteloComponents.Queue, entityId);
+    if (torii && $accountStore) queueId = torii.poseidonHash(['0x6f63746f67756e73', '0x0'])
+    if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.address)]);
+
+    if (torii && account!) playerId = torii.poseidonHash([account.address, '0x6f63746f67756e73', '0x0'])
+
+    if (planeteloComponents)console.log(getComponentValue(planeteloComponents.Player, addressId));
+
+
+    $: if ($planeteloStore) queue = componentValueStore(planeteloComponents.Queue, queueId);
+    $: if ($planeteloStore) player = componentValueStore(planeteloComponents.Player, addressId);
+
+    $: if ($planeteloStore) status = componentValueStore(planeteloComponents.PlayerStatus, playerId);
+
+    console.log($player);
+    console.log($status);
+    console.log($queue);
+
     $: if ($burnerStore) burners = $burnerStore
 
-    if (toriiClient) entities = toriiClient.getAllEntities(1000, 0);
 
-    console.log(entities);
-    console.log(queue!);
 
 </script>
 
@@ -61,8 +81,11 @@
     </div>
 
     <div class="queue">
-        <div class="playlist-item">
-            <button on:click={() => client.queue.queue({account, game: BigInt(0), playlist: BigInt(0)})}>Select</button>
+        <div class="queue-item">
+            <button on:click={() => client.queue.queue({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Queue</button>
+            <button on:click={() => client.queue.dequeue({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Dequeue</button>
+            <button on:click={() => client.queue.matchmake({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Refresh</button>
+
         </div>
 </div>
 

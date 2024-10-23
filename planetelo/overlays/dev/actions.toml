@@ -5,4 +5,5 @@ writes = [
   "planetelo-PlayerStatus",
   "planetelo-QueueIndex",
   "planetelo-Game",
+  "planetelo-Player",
 ]

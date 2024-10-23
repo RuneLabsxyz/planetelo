@@ -24,7 +24,7 @@ mod queue {
 
     use planetary_interface::utils::systems::{get_world_contract_address};
 
-    use planetelo::models::{PlayerStatus, QueueStatus, Elo, QueueIndex, Game, Queue};
+    use planetelo::models::{PlayerStatus, QueueStatus, Elo, QueueIndex, Game, Queue, Player};
     use planetelo::elo::EloTrait;
 
     use planetelo::consts::ELO_DIFF;
@@ -37,12 +37,14 @@ mod queue {
             let address = get_caller_address();
             let mut player = get!(world, (address, game, playlist), PlayerStatus);
             let mut elo = get!(world, (address, game, playlist), Elo);
+            let mut player_model = get!(world, (address), Player);
             if elo.value == 0 {
                 elo.value = 800;
                 set!(world, (elo));
             }
 
             assert!(player.status == QueueStatus::None, "Player is already in the queue");
+            player_model.queues_joined += 1;
 
             let mut queue = get!(world, (game, playlist), Queue);
             
@@ -58,7 +60,7 @@ mod queue {
             queue.length += 1;
             player.status = QueueStatus::Queued;
 
-            set!(world, (player, new, queue));
+            set!(world, (player, new, queue, player_model));
             
         }
 
@@ -94,15 +96,21 @@ mod queue {
 
             let mut player_index = get!(world, (game, playlist, player_status.index), QueueIndex);
             let time_diff = timestamp - player_index.timestamp;
-            let time_diff_secs = time_diff / 1000;
+            let time_diff_secs = time_diff;
+            println!("time_diff_secs: {}", time_diff_secs);
             assert!(time_diff_secs > 30, "Must be in queue for at least 30 seconds to refresh");
 
-            let queue = get!(world, (game, playlist), Queue);
+            let mut queue = get!(world, (game, playlist), Queue);
+            assert!(queue.length > 1, "There must be at least 2 players in the queue to matchmake");
             let mut potential_index = player_index;
             let mut i = 0;
             let mut found = false;
             while i < queue.length {
                 let potential_index = get!(world, (game, playlist, i), QueueIndex);
+                if potential_index.player == player_index.player {
+                    i+=1;
+                    continue;
+                }
                 if potential_index.elo > player_index.elo {
                     if potential_index.elo - player_index.elo > ELO_DIFF {
                         i+=1;
@@ -139,18 +147,22 @@ mod queue {
             let mut potential_status = get!(world, (potential_index.player, game, playlist), PlayerStatus);
             potential_status.status = QueueStatus::InGame(game_id);
 
-            let game = Game {
+            let game_model = Game {
                 game: game,
                 id: game_id,
                 playlist: playlist,
-                player1: player_index.player,
+                player1: address,
                 player2: potential_index.player,
                 timestamp: timestamp
             };
 
-            let mut last_player = get!(world, (game, playlist, queue.length - 1), QueueIndex);
-            let mut second_last_player = get!(world, (game, playlist, queue.length - 2), QueueIndex);
-            let mut replacing = QueueIndex { player: contract_address_const::<0x0>(), elo: 0, timestamp: 0, index: 0, game: 0, playlist: 0 };
+            let last_index = queue.length - 1;
+            let second_last_index = queue.length -2;
+
+            let mut last_player = get!(world, (game, playlist, last_index), QueueIndex);
+            let mut second_last_player = get!(world, (game, playlist, second_last_index), QueueIndex);
+
+            let mut replacing = QueueIndex { game, playlist, index: 0, player: contract_address_const::<0x0>(), elo: 0, timestamp: 0 };
 
             //if both are not in the last two positions, move last 2 positions to their spots and delelete the last 2 positions
             if player_index.index < queue.length - 2 && potential_index.index < queue.length - 2 {
@@ -213,8 +225,8 @@ mod queue {
             }
 
 
-            
-            set!(world, (player_status, potential_status, game));
+            queue.length -= 2;
+            set!(world, (player_status, potential_status, game_model, queue));
 
             
 
