@@ -1,36 +1,36 @@
 <script lang="ts">
     import type { Entity } from "@dojoengine/recs";
     import { componentValueStore, type ComponentStore } from "./dojo/componentValueStore";
-    import { planeteloStore, planetaryStore, accountStore, burnerStore } from "./stores";
+    import { planeteloStore, planetaryStore, accountStore } from "./stores";
     import { Account } from "starknet";
     import type { Burner } from "@dojoengine/create-burner";
-    import { handleBurnerChange, handleNewBurner, handleClearBurners } from "./handlers";
     import { getEntityIdFromKeys } from "@dojoengine/utils";
     import { getComponentValue } from "@dojoengine/recs";
+    import Controller from "@cartridge/controller";
+    import { connect } from "./handlers";
 
     let queueId: Entity;
     let addressId: Entity;
     let playerId: Entity; 
-    let account: Account;
+    let account: Controller;
     let queue: ComponentStore;
     let status: ComponentStore;
     let game_planet: ComponentStore;
     let player: ComponentStore;
-    let burners: Burner[];
     let entities: any;
     
-    $: ({ planeteloComponents, torii, toriiClient, burnerManager, client } = $planeteloStore);
+    $: ({ planeteloComponents, torii, toriiClient, client } = $planeteloStore);
     $: ({ planets, planetaryComponents, planetaryTorii } = $planetaryStore);
     if ($accountStore) account = $accountStore; 
 
-    if ($accountStore) console.log(account!.address);
+    if ($accountStore) console.log(account!.account!.address);
 
     if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x6f63746f67756e73']));
 
     if (torii && $accountStore) queueId = torii.poseidonHash(['0x6f63746f67756e73', '0x0'])
-    if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.address)]);
+    if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.account!.address)]);
 
-    if (torii && account!) playerId = torii.poseidonHash([account.address, '0x6f63746f67756e73', '0x0'])
+    if (torii && account!) playerId = torii.poseidonHash([account.account!.address, '0x6f63746f67756e73', '0x0'])
 
     if (planeteloComponents)console.log(getComponentValue(planeteloComponents.Player, addressId));
 
@@ -44,7 +44,6 @@
     console.log($status);
     console.log($queue);
 
-    $: if ($burnerStore) burners = $burnerStore
 
 
 
@@ -57,34 +56,15 @@
         <p>Setting up...</p>
     {/if}
 
-    <button on:click={handleNewBurner}>
-        {burnerManager?.isDeploying ? "deploying burner" : "create burner"}
-    </button>
-
-    <div class="card">
-        <div>{`burners deployed: ${burners.length}`}</div>
-        <div>
-            select signer:{" "}
-            <select on:change={handleBurnerChange}>
-                {#each burners as burner}
-                        <option value={burner.address}>
-                            {burner.address}
-                        </option>
-                {/each}
-            </select>
-        </div>
-        <div>
-            <button on:click={handleClearBurners}>
-                Clear burners
-            </button>
-        </div>
-    </div>
+      <div>
+          <button on:click={connect}>
+              Connect
+          </button>
+      </div>
 
     <div class="queue">
         <div class="queue-item">
-            <button on:click={() => client.queue.queue({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Queue</button>
-            <button on:click={() => client.queue.dequeue({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Dequeue</button>
-            <button on:click={() => client.queue.matchmake({account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt(0)})}>Refresh</button>
+            <button on:click={() => console.log("queue")}>Queue</button>
 
         </div>
 </div>

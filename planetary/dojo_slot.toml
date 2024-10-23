@@ -1,0 +1,23 @@
+[world]
+name = "Planetary"
+description = "Planetary: connecting worlds"
+icon_uri = "https://raw.githubusercontent.com/underware-gg/pistols-64/main/images/planetary-icon.png"
+cover_uri = "https://raw.githubusercontent.com/underware-gg/pistols-64/main/images/planetary-cover.jpg"
+website = "https://github.com/underware-gg/pistols-64"
+
+seed = "planetary"
+
+[world.socials]
+x = "https://x.com/underware_gg"
+github = "https://github.com/underware-gg/pistols-64"
+# discord = "https://discord.gg/FB2wR6uF"
+# telegram = "https://t.me/dojoengine"
+
+[namespace]
+default = "planetary"
+
+[env]
+rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
+account_address = "0x4fccfb802ccd4f5aaf727831851d930cadcb594f048c86756d39f5b3ff62ff7"
+private_key = "0x117d7b2718659058eab0715fe0376463f70da1937c541762d74845c558ae058"
+world_address = "0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369"

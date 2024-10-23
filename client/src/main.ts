@@ -5,7 +5,7 @@ import { planetarySetup } from "./dojo/planetarySetup";
 import { dojoConfig as planetaryConfig } from "../planetaryConfig";
 import { dojoConfig as planeteloConfig } from "../planeteloConfig";
 
-import { accountStore, burnerStore, planeteloStore, planetaryStore } from "./stores";
+import { accountStore, planeteloStore, planetaryStore } from "./stores";
 
 // Create a writable store for the setup result
 
@@ -15,8 +15,6 @@ async function initApp() {
   let planetarySetupRes = await planetarySetup(planetaryConfig);
   planeteloStore.set(setupRes);
   planetaryStore.set(planetarySetupRes);
-  burnerStore.set(setupRes.burnerManager.list());
-  accountStore.set(setupRes.burnerManager.getActiveAccount())
 
   console.log("App initialized");
 
