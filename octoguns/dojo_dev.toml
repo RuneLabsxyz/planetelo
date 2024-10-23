@@ -18,6 +18,6 @@ default = "octoguns"
 [env]
 rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
 # Default account for katana with seed = 0
-account_address = "0x7fe7c162ba42de077c075ce61d3f811aa7b448c4823ac26cd5ce3904b25cd43"
-private_key = "0x3088623dfef785ccf8bc35d39ef38c0ba5369bbf138ac4e52906cdd710ef528"
+account_address = "0x4fccfb802ccd4f5aaf727831851d930cadcb594f048c86756d39f5b3ff62ff7"
+private_key = "0x117d7b2718659058eab0715fe0376463f70da1937c541762d74845c558ae058"
 world_address = "0x6715946eb3900f0be7dc465125c194280fdca727bf3071972dcda5ad9a612c8"

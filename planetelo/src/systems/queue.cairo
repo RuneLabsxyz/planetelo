@@ -100,19 +100,19 @@ mod queue {
             println!("time_diff_secs: {}", time_diff_secs);
             assert!(time_diff_secs > 30, "Must be in queue for at least 30 seconds to refresh");
 
-            let queue = get!(world, (game, playlist), Queue);
+            let mut queue = get!(world, (game, playlist), Queue);
             assert!(queue.length > 1, "There must be at least 2 players in the queue to matchmake");
             let mut potential_index = player_index;
             let mut i = 0;
             let mut found = false;
             while i < queue.length {
                 let potential_index = get!(world, (game, playlist, i), QueueIndex);
+                if potential_index.player == player_index.player {
+                    i+=1;
+                    continue;
+                }
                 if potential_index.elo > player_index.elo {
                     if potential_index.elo - player_index.elo > ELO_DIFF {
-                        i+=1;
-                        continue;
-                    }
-                    else if potential_index.player == player_index.player {
                         i+=1;
                         continue;
                     }
@@ -123,10 +123,6 @@ mod queue {
                 } 
                 else {
                     if player_index.elo - potential_index.elo > ELO_DIFF {
-                        i+=1;
-                        continue;
-                    }
-                    else if potential_index.player == player_index.player {
                         i+=1;
                         continue;
                     }
@@ -155,7 +151,7 @@ mod queue {
                 game: game,
                 id: game_id,
                 playlist: playlist,
-                player1: player_index.player,
+                player1: address,
                 player2: potential_index.player,
                 timestamp: timestamp
             };
@@ -229,8 +225,8 @@ mod queue {
             }
 
 
-            
-            set!(world, (player_status, potential_status, game_model));
+            queue.length -= 2;
+            set!(world, (player_status, potential_status, game_model, queue));
 
             
 
