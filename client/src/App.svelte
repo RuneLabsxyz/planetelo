@@ -1,13 +1,13 @@
 <script lang="ts">
     import type { Entity } from "@dojoengine/recs";
     import { componentValueStore, type ComponentStore } from "./dojo/componentValueStore";
-    import { planeteloStore, planetaryStore, accountStore } from "./stores";
+    import { planeteloStore, planetaryStore, accountStore, usernameStore } from "./stores";
     import { Account } from "starknet";
     import type { Burner } from "@dojoengine/create-burner";
     import { getEntityIdFromKeys } from "@dojoengine/utils";
     import { getComponentValue } from "@dojoengine/recs";
     import Controller from "@cartridge/controller";
-    import { connect } from "./handlers";
+    import { onMount } from "svelte";
 
     let queueId: Entity;
     let addressId: Entity;
@@ -44,6 +44,25 @@
     console.log($status);
     console.log($queue);
 
+    let controller = new Controller({
+        policies: [
+    ],
+    rpc: "https://api.cartridge.gg/x/planetelo/katana" // sepolia, mainnet, or slot. (default sepolia)
+    });
+
+    async function connect() {
+        try {
+            const res = await controller.connect();
+            if (res) {
+                accountStore.set(controller);
+                usernameStore.set(await controller.username()!);
+                console.log(usernameStore);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 
 
 
@@ -57,6 +76,9 @@
     {/if}
 
       <div>
+        {#if $usernameStore}
+            <p>{$usernameStore}</p>
+        {/if}
           <button on:click={connect}>
               Connect
           </button>

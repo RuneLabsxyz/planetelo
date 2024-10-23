@@ -16,7 +16,8 @@
     "svelte-check": "^3.8.5",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-mkcert": "^1.17.6"
   },
   "dependencies": {
     "@cartridge/controller": "^0.4.0",
