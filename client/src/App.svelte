@@ -2,17 +2,18 @@
     import type { Entity } from "@dojoengine/recs";
     import { componentValueStore, type ComponentStore } from "./dojo/componentValueStore";
     import { planeteloStore, planetaryStore, accountStore, usernameStore } from "./stores";
-    import { Account } from "starknet";
+    import type { Account, AccountInterface } from "starknet";
     import type { Burner } from "@dojoengine/create-burner";
     import { getEntityIdFromKeys } from "@dojoengine/utils";
     import { getComponentValue } from "@dojoengine/recs";
     import Controller from "@cartridge/controller";
     import { onMount } from "svelte";
+    import { connect } from "./controller";
 
     let queueId: Entity;
     let addressId: Entity;
     let playerId: Entity; 
-    let account: Controller;
+    let account: AccountInterface;
     let queue: ComponentStore;
     let status: ComponentStore;
     let game_planet: ComponentStore;
@@ -23,14 +24,14 @@
     $: ({ planets, planetaryComponents, planetaryTorii } = $planetaryStore);
     if ($accountStore) account = $accountStore; 
 
-    if ($accountStore) console.log(account!.account!.address);
+    if ($accountStore) console.log(account!.address);
 
     if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x6f63746f67756e73']));
 
     if (torii && $accountStore) queueId = torii.poseidonHash(['0x6f63746f67756e73', '0x0'])
-    if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.account!.address)]);
+    if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.address)]);
 
-    if (torii && account!) playerId = torii.poseidonHash([account.account!.address, '0x6f63746f67756e73', '0x0'])
+    if (torii && account!) playerId = torii.poseidonHash([account.address, '0x6f63746f67756e73', '0x0'])
 
     if (planeteloComponents)console.log(getComponentValue(planeteloComponents.Player, addressId));
 
@@ -43,28 +44,6 @@
     console.log($player);
     console.log($status);
     console.log($queue);
-
-    let controller = new Controller({
-        policies: [
-    ],
-    rpc: "https://api.cartridge.gg/x/planetelo/katana" // sepolia, mainnet, or slot. (default sepolia)
-    });
-
-    async function connect() {
-        try {
-            const res = await controller.connect();
-            if (res) {
-                accountStore.set(controller);
-                usernameStore.set(await controller.username()!);
-                console.log(usernameStore);
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-
-
 
 </script>
 
@@ -79,14 +58,14 @@
         {#if $usernameStore}
             <p>{$usernameStore}</p>
         {/if}
-          <button on:click={connect}>
+          <button on:click={(e) => connect(e)}>
               Connect
           </button>
       </div>
 
     <div class="queue">
         <div class="queue-item">
-            <button on:click={() => console.log("queue")}>Queue</button>
+            <button on:click={() => client.queue.queue({account: account, game: BigInt('0x6f63746f67756e73'), playlist: BigInt('0x0') } )}>Queue</button>
 
         </div>
 </div>
