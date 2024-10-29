@@ -1,0 +1,9 @@
+tag = "planetelo-queue"
+writes = [
+  "planetelo-Queue",
+  "planetelo-Elo",
+  "planetelo-PlayerStatus",
+  "planetelo-QueueIndex",
+  "planetelo-Game",
+  "planetelo-Player",
+]

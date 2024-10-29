@@ -32,16 +32,9 @@ export async function planetarySetup({ ...config }: DojoConfig) {
   const sync = await getSyncEntities(
     planetaryTorii,
     contractComponents as any,
-    undefined,
     []
   );
 
-  const eventSync = getSyncEvents(
-    planetaryTorii,
-    contractComponents as any,
-    undefined,
-    []
-  );
 
   // setup world
   const client = await setupWorld(dojoProvider);
@@ -53,7 +46,6 @@ export async function planetarySetup({ ...config }: DojoConfig) {
     config,
     dojoProvider,
     planetaryTorii,
-    eventSync,
     torii,
     sync,
     planets

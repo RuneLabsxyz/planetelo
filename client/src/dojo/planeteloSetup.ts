@@ -33,7 +33,6 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
   const sync = await getSyncEntities(
     toriiClient,
     contractComponents as any,
-    undefined,
     []
   );
 
@@ -47,29 +46,6 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
   // setup world
   const client = await setupWorld(dojoProvider);
 
-  // create burner manager
-  const burnerManager = new BurnerManager({
-    masterAccount: new Account(
-      {
-        nodeUrl: 'https://api.cartridge.gg/x/planetelo/katana',
-      },
-      '0x4fccfb802ccd4f5aaf727831851d930cadcb594f048c86756d39f5b3ff62ff7',
-      '0x117d7b2718659058eab0715fe0376463f70da1937c541762d74845c558ae058'
-    ),
-    accountClassHash: config.accountClassHash,
-    rpcProvider: dojoProvider.provider,
-    feeTokenAddress: config.feeTokenAddress,
-  });
-
-  try {
-    await burnerManager.init();
-    if (burnerManager.list().length === 0) {
-      await burnerManager.create();
-    }
-  } catch (e) {
-    console.error(e);
-  }
-
   return {
     client,
     planeteloComponents,
@@ -79,7 +55,6 @@ export async function planeteloSetup({ ...config }: DojoConfig) {
     },
     config,
     dojoProvider,
-    burnerManager,
     toriiClient,
     eventSync,
     torii,

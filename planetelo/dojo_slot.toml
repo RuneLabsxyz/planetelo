@@ -1,0 +1,23 @@
+[world]
+name = "Planetelo"
+description = "Generalized matchmaking for Dojo worlds"
+icon_uri = "https://raw.githubusercontent.com/underware-gg/pistols-64/main/images/planetary-icon.png"
+cover_uri = "https://raw.githubusercontent.com/underware-gg/pistols-64/main/images/planetary-cover.jpg"
+website = "https://github.com/underware-gg/pistols-64"
+
+seed = "planetelo"
+
+[world.socials]
+x = "https://x.com/underware_gg"
+github = "https://github.com/underware-gg/pistols-64"
+# discord = "https://discord.gg/FB2wR6uF"
+# telegram = "https://t.me/dojoengine"
+
+[namespace]
+default = "planetelo"
+
+[env]
+rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
+account_address = "0x45147a6644472807b8b60ab610c99ec2b6eab9e2342271f06977b7695e71e64"
+private_key = "0xb88c28f1f8b9aff8aa0bd1fecd41a7fca96bc16f25a005eabed15438b35ba6"
+#world_address = "0x27ff3447ba2c7e891a1d6b03490d9d7038806cc58b2d214dcd5d2eb26376369"
