@@ -12,9 +12,9 @@ import { accountStore, planeteloStore, planetaryStore } from "./stores";
 async function initApp() {
   // Update the store with the setup result
   let setupRes = await planeteloSetup(planeteloConfig);
-  let planetarySetupRes = await planetarySetup(planetaryConfig);
+  //let planetarySetupRes = await planetarySetup(planetaryConfig);
   planeteloStore.set(setupRes);
-  planetaryStore.set(planetarySetupRes);
+  //planetaryStore.set(planetarySetupRes);
 
   console.log("App initialized");
 

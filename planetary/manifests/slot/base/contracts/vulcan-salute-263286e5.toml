@@ -1,0 +1,11 @@
+kind = "DojoContract"
+class_hash = "0xd4ad1e2d8fbd05fcf2f3a539e4c350c0363319a26cdf478829e62e5f4d364a"
+original_class_hash = "0xd4ad1e2d8fbd05fcf2f3a539e4c350c0363319a26cdf478829e62e5f4d364a"
+base_class_hash = "0x0"
+abi = "manifests/slot/base/abis/contracts/vulcan-salute-263286e5.json"
+reads = []
+writes = []
+init_calldata = []
+tag = "vulcan-salute"
+systems = []
+manifest_name = "vulcan-salute-263286e5"

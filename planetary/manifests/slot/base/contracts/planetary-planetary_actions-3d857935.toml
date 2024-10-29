@@ -1,0 +1,14 @@
+kind = "DojoContract"
+class_hash = "0x7ca8452d6103f78a2045c7601d95f426b56770880e1e93f1a27757cbc95667a"
+original_class_hash = "0x7ca8452d6103f78a2045c7601d95f426b56770880e1e93f1a27757cbc95667a"
+base_class_hash = "0x0"
+abi = "manifests/slot/base/abis/contracts/planetary-planetary_actions-3d857935.json"
+reads = []
+writes = []
+init_calldata = []
+tag = "planetary-planetary_actions"
+systems = [
+    "register",
+    "unregister",
+]
+manifest_name = "planetary-planetary_actions-3d857935"

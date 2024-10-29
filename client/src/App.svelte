@@ -20,12 +20,12 @@
     let entities: any;
     
     $: ({ planeteloComponents, torii, toriiClient, client } = $planeteloStore);
-    $: ({ planets, planetaryComponents, planetaryTorii } = $planetaryStore);
+    //$: ({ planets, planetaryComponents, planetaryTorii } = $planetaryStore);
     if ($accountStore) account = $accountStore; 
 
     if ($accountStore) console.log(account!.account!.address);
 
-    if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x6f63746f67756e73']));
+    //if (planetaryComponents) game_planet = componentValueStore(planetaryComponents.Planet, torii.poseidonHash(['0x6f63746f67756e73']));
 
     if (torii && $accountStore) queueId = torii.poseidonHash(['0x6f63746f67756e73', '0x0'])
     if (torii && account!) addressId = getEntityIdFromKeys([BigInt(account.account!.address)]);

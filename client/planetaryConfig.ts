@@ -1,4 +1,4 @@
-import manifest from "../planetary/manifests/dev/deployment/manifest.json";
+import manifest from "../planetary/manifests/slot/deployment/manifest.json";
 
 import { createDojoConfig } from "@dojoengine/core";
 

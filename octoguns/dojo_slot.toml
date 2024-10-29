@@ -1,10 +1,10 @@
 [world]
-name = "Planetelo"
+name = "Octoguns"
 description = "The official Dojo Starter guide, the quickest and most streamlined way to get your Dojo Autonomous World up and running. This guide will assist you with the initial setup, from cloning the repository to deploying your world."
 cover_uri = "file://assets/cover.png"
 icon_uri = "file://assets/icon.png"
 website = "https://github.com/dojoengine/dojo-starter"
-seed = "planetelo"
+seed = "octoguns"
 
 [world.socials]
 x = "https://x.com/ohayo_dojo"
@@ -13,11 +13,10 @@ github = "https://github.com/dojoengine/dojo-starter"
 telegram = "https://t.me/dojoengine"
 
 [namespace]
-default = "planetelo"
+default = "octoguns"
 
 [env]
-rpc_url = "http://localhost:5050"
-# Default account for katana with seed = 0
-account_address = "0x4fccfb802ccd4f5aaf727831851d930cadcb594f048c86756d39f5b3ff62ff7"
-private_key = "0x117d7b2718659058eab0715fe0376463f70da1937c541762d74845c558ae058"
-world_address = "0x55b4d98ac0e7cb9775a5761349e08e2bd94befe3921b0e7656be55701b2e243"
+rpc_url = "https://api.cartridge.gg/x/planetelo/katana"
+account_address = "0x45147a6644472807b8b60ab610c99ec2b6eab9e2342271f06977b7695e71e64"
+private_key = "0xb88c28f1f8b9aff8aa0bd1fecd41a7fca96bc16f25a005eabed15438b35ba6"
+world_address = "0x6715946eb3900f0be7dc465125c194280fdca727bf3071972dcda5ad9a612c8"
