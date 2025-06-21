@@ -1,5 +1,0 @@
-tag = "pistols64-actions"
-writes = [
-  "pistols64-Challenge",
-  "pistols64-Round",
-]

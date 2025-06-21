@@ -31,34 +31,34 @@ pub struct PlayerStatus {
     #[key]
     pub playlist: u128,
     pub status: QueueStatus,
-    pub index: u32
+    pub index: u128
 }
 
-#[derive(Copy, Drop, Serde)]
+#[derive(Clone, Drop, Serde)]
 #[dojo::model]
 pub struct Queue {
     #[key]
     pub game: felt252,
     #[key]
     pub playlist: u128,
-    pub length: u32
+    pub length: u128
 }
 
-#[derive(Copy, Drop, Serde)]
+#[derive(Clone, Drop, Serde, Introspect)]
 #[dojo::model]
-pub struct QueueIndex {
+pub struct QueueMember {
     #[key]
     pub game: felt252,
     #[key]
     pub playlist: u128,
     #[key]
-    pub index: u32,
+    pub index: u128,
     pub player: ContractAddress,
     pub timestamp: u64,
     pub elo: u64
 }
 
-#[derive(Copy, Drop, Serde)]
+#[derive(Clone, Drop, Serde)]
 #[dojo::model]
 pub struct Game {
     #[key]
@@ -77,3 +77,20 @@ pub enum QueueStatus {
     Queued,
     InGame: u128
 }      
+
+#[derive(Clone, Drop, Serde)]
+#[dojo::model]
+pub struct Global {
+    #[key]
+    pub key: u32,
+    pub nonce: u128
+}
+
+#[generate_trait]
+impl GlobalImpl of GlobalTrait {
+    fn uuid(ref self: Global) -> u128 {
+        let id = self.nonce;
+        self.nonce += 1;
+        id
+    }
+}

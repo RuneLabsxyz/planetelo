@@ -1,6 +1,0 @@
-tag = "planetelo-planetelo"
-writes = [
-    "planetelo-Playlist",
-    "planetelo-PlaylistGlobal",
-
-]

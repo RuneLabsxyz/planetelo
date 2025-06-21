@@ -1,20 +1,18 @@
 [package]
-cairo-version = "=2.7.0"
-name = "planetelo"
 version = "0.1.0"
+name = "planetelo"
+cairo-version = "2.10.1"
 
 [cairo]
 sierra-replace-ids = true
 
-[scripts]
-migrate = "sozo build && sozo migrate apply"
-
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.0.0-alpha.19" }
-planetary_interface = { path = "../planetary_interface" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag = "v1.5.0" }
+planetelo_interface = { path = "../planetelo_interface" }
 
-[[target.dojo]]
-
+[[target.starknet-contract]]
+build-external-contracts = ["dojo::world::world_contract::world"]
+cairo_test = {v= "2.10.1"}
 
 
 #--------------------------
@@ -22,3 +20,4 @@ planetary_interface = { path = "../planetary_interface" }
 #
 [profile.dev]
 [profile.slot]
+[profile.sepolia]
